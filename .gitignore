@@ -1,0 +1,52 @@
+### Build output ###
+target/
+!**/src/main/**/target/
+!**/src/test/**/target/
+build/
+!**/src/main/**/build/
+!**/src/test/**/build/
+.mvn/wrapper/maven-wrapper.jar
+
+### Secrets & local configuration (never commit real credentials) ###
+.env
+.env.*
+!.env.example
+application-local.properties
+application-local.yml
+
+### Database backups ###
+*.dump
+*.backup
+
+### Local JDK copies (large binaries) ###
+oracleJdk*/
+
+### Logs ###
+*.log
+
+### IDEs ###
+.idea/
+*.iws
+*.iml
+*.ipr
+.vscode/
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+
+### OS files ###
+.DS_Store
+Thumbs.db
+desktop.ini
+
+### Spring Initializr leftovers ###
+HELP.md

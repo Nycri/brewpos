@@ -1,0 +1,933 @@
+/* ============================================================================
+ * BrewPOS — Specialty Café Point-of-Sale Design System
+ * Warm Espresso, Oat Canvas & Caramel Terracotta Palette
+ * ============================================================================ */
+
+:root {
+  --pos-espresso: #1f1a17;
+  --pos-espresso-soft: #2e2622;
+  --pos-accent: #b85627;
+  --pos-accent-hover: #9c461d;
+  --pos-accent-tint: #fdf3ee;
+  --pos-bg: #f3f0eb;
+  --pos-surface: #ffffff;
+  --pos-surface-subtle: #faf8f5;
+  --pos-border: #e5dfd7;
+  --pos-border-strong: #d4cbc0;
+  --pos-text: #1f1a17;
+  --pos-text-muted: #6e655e;
+  --pos-success-bg: #e8f5ee;
+  --pos-success-text: #166534;
+  --pos-online-bg: #e6f0fa;
+  --pos-online-text: #1d4ed8;
+  --pos-radius: 12px;
+  --pos-radius-sm: 8px;
+  --pos-shadow: 0 2px 10px rgba(31, 26, 23, 0.05);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--pos-bg);
+  color: var(--pos-text);
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+}
+
+.tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+.d-none {
+  display: none !important;
+}
+
+/* ============================================================================
+ * 1. Symmetrical 3-Zone Top Bar (Uncongested, Even Spacing)
+ * ============================================================================ */
+.pos-topbar {
+  background-color: var(--pos-espresso);
+  color: #ffffff;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.16);
+}
+
+.pos-topbar-inner {
+  max-width: 1600px;
+  margin: 0 auto;
+  min-height: 64px;
+  padding: 0.6rem 1.5rem;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.pos-brand-zone {
+  display: flex;
+  align-items: center;
+}
+
+.pos-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 1.15rem;
+  letter-spacing: -0.01em;
+}
+
+.pos-brand:hover {
+  color: #ffffff;
+}
+
+.pos-brand-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: 9px;
+  background-color: var(--pos-accent);
+  color: #ffffff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.05rem;
+}
+
+.pos-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background-color: var(--pos-espresso-soft);
+  padding: 0.3rem;
+  border-radius: 11px;
+}
+
+.pos-nav-btn {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 0.45rem 1.15rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease;
+  white-space: nowrap;
+}
+
+.pos-nav-btn:hover,
+.pos-nav-btn:focus-visible {
+  color: #ffffff;
+  background-color: rgba(255, 255, 255, 0.08);
+  outline: none;
+}
+
+.pos-nav-btn.active {
+  background-color: var(--pos-accent);
+  color: #ffffff;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
+}
+
+.pos-operator-zone {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.pos-staff-select {
+  appearance: none;
+  -webkit-appearance: none;
+  background-color: var(--pos-espresso-soft);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  background-size: 14px 14px;
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 9px;
+  padding: 0.44rem 2.15rem 0.44rem 0.85rem;
+  font-size: 0.86rem;
+  font-weight: 600;
+  min-width: 10.5rem;
+  max-width: 14.5rem;
+  cursor: pointer;
+  transition: border-color 0.15s ease, background-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.pos-staff-select:hover:not(:disabled) {
+  border-color: rgba(255, 255, 255, 0.32);
+}
+
+.pos-staff-select:focus {
+  outline: none;
+  border-color: var(--pos-accent);
+  box-shadow: 0 0 0 3px rgba(184, 86, 39, 0.28);
+}
+
+.pos-staff-select option {
+  background-color: var(--pos-espresso);
+  color: #ffffff;
+}
+
+@media (max-width: 991.98px) {
+  .pos-topbar-inner {
+    grid-template-columns: 1fr auto;
+    padding: 0.65rem 1rem;
+  }
+  .pos-nav {
+    grid-column: 1 / -1;
+    order: 3;
+    width: 100%;
+    justify-content: space-between;
+    overflow-x: auto;
+  }
+  .pos-nav-btn {
+    flex: 1 1 auto;
+    text-align: center;
+    padding: 0.45rem 0.75rem;
+  }
+}
+
+/* ============================================================================
+ * 2. Main Container, Cards & Buttons
+ * ============================================================================ */
+.pos-main {
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 1.25rem 1.5rem 2rem;
+}
+
+@media (max-width: 767.98px) {
+  .pos-main {
+    padding: 1rem;
+  }
+}
+
+.pos-card {
+  background-color: var(--pos-surface);
+  border: 1px solid var(--pos-border);
+  border-radius: var(--pos-radius);
+  box-shadow: var(--pos-shadow);
+  overflow: hidden;
+}
+
+.pos-card-header {
+  padding: 0.9rem 1.25rem;
+  border-bottom: 1px solid var(--pos-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--pos-surface);
+}
+
+.pos-card-body {
+  padding: 1.15rem 1.25rem;
+}
+
+.pos-card-footer {
+  padding: 0.75rem 1.25rem;
+  border-top: 1px solid var(--pos-border);
+  background-color: var(--pos-surface-subtle);
+}
+
+.pos-panel-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--pos-text);
+  letter-spacing: -0.01em;
+}
+
+.pos-count-pill {
+  background-color: var(--pos-surface-subtle);
+  border: 1px solid var(--pos-border);
+  color: var(--pos-text-muted);
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 0.15rem 0.55rem;
+  border-radius: 999px;
+}
+
+.pos-btn-primary {
+  background-color: var(--pos-accent);
+  border-color: var(--pos-accent);
+  color: #ffffff;
+  font-weight: 600;
+  border-radius: var(--pos-radius-sm);
+}
+
+.pos-btn-primary:hover,
+.pos-btn-primary:focus-visible {
+  background-color: var(--pos-accent-hover);
+  border-color: var(--pos-accent-hover);
+  color: #ffffff;
+}
+
+.pos-btn-outline {
+  background-color: var(--pos-surface);
+  border: 1px solid var(--pos-border-strong);
+  color: var(--pos-text);
+  font-weight: 500;
+  border-radius: var(--pos-radius-sm);
+}
+
+.pos-btn-outline:hover {
+  background-color: var(--pos-surface-subtle);
+  border-color: var(--pos-text-muted);
+  color: var(--pos-text);
+}
+
+.pos-btn-ghost {
+  background: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  border: 0;
+  font-weight: 600;
+}
+
+.pos-btn-ghost:hover {
+  background: rgba(255, 255, 255, 0.32);
+  color: #ffffff;
+}
+
+.pos-input {
+  border-color: var(--pos-border-strong);
+  border-radius: var(--pos-radius-sm);
+}
+
+.pos-input:focus {
+  border-color: var(--pos-accent);
+  box-shadow: 0 0 0 3px rgba(184, 86, 39, 0.15);
+}
+
+/* ============================================================================
+ * 3. Screen 1 — Register Split-Pane Layout
+ * ============================================================================ */
+.pos-register-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 390px;
+  gap: 1.25rem;
+  align-items: start;
+}
+
+@media (max-width: 1199.98px) {
+  .pos-register-grid {
+    grid-template-columns: minmax(0, 1fr) 350px;
+  }
+}
+
+@media (max-width: 991.98px) {
+  .pos-register-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.pos-catalog-toolbar {
+  padding: 0.85rem 1.15rem;
+  border-bottom: 1px solid var(--pos-border);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  background-color: var(--pos-surface-subtle);
+}
+
+.pos-category-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.pos-cat-pill {
+  border: 1px solid var(--pos-border-strong);
+  background-color: var(--pos-surface);
+  color: var(--pos-text-muted);
+  font-size: 0.83rem;
+  font-weight: 600;
+  padding: 0.38rem 0.9rem;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all 0.14s ease;
+}
+
+.pos-cat-pill:hover {
+  border-color: var(--pos-text);
+  color: var(--pos-text);
+}
+
+.pos-cat-pill.active {
+  background-color: var(--pos-espresso);
+  border-color: var(--pos-espresso);
+  color: #ffffff;
+}
+
+.pos-catalog-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.pos-search-input {
+  width: 190px;
+  border-radius: 999px;
+  padding-left: 0.85rem;
+  border-color: var(--pos-border-strong);
+}
+
+.pos-search-input:focus {
+  border-color: var(--pos-accent);
+  box-shadow: 0 0 0 3px rgba(184, 86, 39, 0.14);
+}
+
+.pos-catalog-body {
+  padding: 1.15rem;
+}
+
+.pos-category-section + .pos-category-section {
+  margin-top: 1.5rem;
+}
+
+.pos-category-heading {
+  font-size: 0.76rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--pos-text-muted);
+  margin: 0 0 0.75rem;
+}
+
+.pos-item-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(185px, 1fr));
+  gap: 0.8rem;
+}
+
+/* Tactile Tap-Anywhere POS Product Tile */
+.pos-item-tile {
+  position: relative;
+  text-align: left;
+  width: 100%;
+  min-height: 108px;
+  padding: 0.9rem 1rem;
+  border-radius: 11px;
+  border: 1px solid var(--pos-border);
+  background-color: var(--pos-surface);
+  color: var(--pos-text);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 0.65rem;
+  cursor: pointer;
+  transition: transform 0.1s ease, border-color 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
+}
+
+.pos-item-tile:hover:not(:disabled) {
+  border-color: var(--pos-accent);
+  box-shadow: 0 4px 12px rgba(184, 86, 39, 0.1);
+  transform: translateY(-1px);
+}
+
+.pos-item-tile:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.pos-item-tile.in-cart {
+  border-color: var(--pos-accent);
+  background-color: var(--pos-accent-tint);
+}
+
+.pos-item-tile:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.pos-tile-name {
+  font-weight: 650;
+  font-size: 0.94rem;
+  line-height: 1.3;
+  padding-right: 1.75rem;
+}
+
+.pos-tile-qty-badge {
+  position: absolute;
+  top: 0.65rem;
+  right: 0.65rem;
+  min-width: 24px;
+  height: 24px;
+  padding: 0 0.45rem;
+  border-radius: 999px;
+  background-color: var(--pos-accent);
+  color: #ffffff;
+  font-size: 0.76rem;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pos-tile-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.pos-tile-price {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--pos-espresso);
+}
+
+.pos-tile-plus {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background-color: var(--pos-surface-subtle);
+  border: 1px solid var(--pos-border);
+  color: var(--pos-text-muted);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.pos-item-tile:hover .pos-tile-plus,
+.pos-item-tile.in-cart .pos-tile-plus {
+  background-color: var(--pos-accent);
+  border-color: var(--pos-accent);
+  color: #ffffff;
+}
+
+/* ============================================================================
+ * 4. Right Pane — Register Order Ticket
+ * ============================================================================ */
+.pos-ticket-pane {
+  position: sticky;
+  top: 80px;
+  display: flex;
+  flex-direction: column;
+  max-height: calc(100vh - 96px);
+}
+
+@media (max-width: 991.98px) {
+  .pos-ticket-pane {
+    position: static;
+    max-height: none;
+  }
+}
+
+.pos-ticket-header {
+  padding: 0.9rem 1.15rem;
+  border-bottom: 1px solid var(--pos-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.pos-btn-clear {
+  color: var(--pos-text-muted);
+  font-weight: 600;
+  font-size: 0.8rem;
+  border: 0;
+  background: transparent;
+  padding: 0.25rem 0.5rem;
+  border-radius: 6px;
+}
+
+.pos-btn-clear:hover:not(:disabled) {
+  color: #b91c1c;
+  background-color: #fef2f2;
+}
+
+.pos-ticket-controls {
+  padding: 0.8rem 1.15rem;
+  background-color: var(--pos-surface-subtle);
+  border-bottom: 1px solid var(--pos-border);
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0.6rem;
+  align-items: center;
+}
+
+.pos-payment-toggle {
+  display: inline-flex;
+  background-color: #e9e4dc;
+  padding: 0.2rem;
+  border-radius: 8px;
+}
+
+.pos-pay-btn {
+  border: 0;
+  background: transparent;
+  color: var(--pos-text-muted);
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 0.3rem 0.75rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.14s ease;
+}
+
+.pos-pay-btn.active {
+  background-color: var(--pos-surface);
+  color: var(--pos-espresso);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.pos-ticket-lines {
+  flex: 1 1 auto;
+  overflow-y: auto;
+  min-height: 210px;
+  padding: 0.25rem 1.15rem;
+}
+
+.pos-ticket-table td {
+  padding: 0.65rem 0.25rem;
+  border-bottom: 1px dashed var(--pos-border);
+}
+
+.pos-ticket-table tr:last-child td {
+  border-bottom: 0;
+}
+
+.pos-stepper {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--pos-border-strong);
+  border-radius: 8px;
+  background-color: var(--pos-surface);
+  overflow: hidden;
+}
+
+.pos-step-btn {
+  border: 0;
+  background: transparent;
+  color: var(--pos-text);
+  width: 26px;
+  height: 28px;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 0;
+  line-height: 1;
+}
+
+.pos-step-btn:hover:not(:disabled) {
+  background-color: var(--pos-surface-subtle);
+}
+
+.pos-qty-input {
+  width: 34px;
+  height: 28px;
+  border: 0;
+  border-left: 1px solid var(--pos-border);
+  border-right: 1px solid var(--pos-border);
+  text-align: center;
+  font-size: 0.84rem;
+  font-weight: 600;
+  padding: 0;
+  -moz-appearance: textfield;
+}
+
+.pos-qty-input::-webkit-outer-spin-button,
+.pos-qty-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.pos-qty-input:focus {
+  outline: none;
+  background-color: var(--pos-accent-tint);
+}
+
+.pos-remove-btn {
+  border: 0;
+  background: transparent;
+  color: var(--pos-text-muted);
+  font-size: 1.05rem;
+  line-height: 1;
+  padding: 0.2rem 0.35rem;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.pos-remove-btn:hover:not(:disabled) {
+  color: #b91c1c;
+  background-color: #fef2f2;
+}
+
+.pos-ticket-footer {
+  padding: 1rem 1.15rem 1.15rem;
+  border-top: 1px solid var(--pos-border);
+  background-color: var(--pos-surface-subtle);
+}
+
+.pos-total-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 0.8rem;
+}
+
+.pos-total-label {
+  font-size: 0.95rem;
+  font-weight: 650;
+  color: var(--pos-text-muted);
+}
+
+.pos-total-amount {
+  font-size: 1.65rem;
+  font-weight: 800;
+  color: var(--pos-espresso);
+  letter-spacing: -0.02em;
+}
+
+.pos-btn-charge {
+  background-color: var(--pos-accent);
+  border: 0;
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 0.98rem;
+  padding: 0.72rem 1rem;
+  border-radius: 10px;
+  transition: background-color 0.15s ease;
+}
+
+.pos-btn-charge:hover:not(:disabled) {
+  background-color: var(--pos-accent-hover);
+  color: #ffffff;
+}
+
+.pos-btn-charge:disabled {
+  background-color: #cfc8bf;
+  color: #ffffff;
+  cursor: not-allowed;
+}
+
+/* ============================================================================
+ * 5. Tables, Forms, Badges, Receipt & KPI Cards
+ * ============================================================================ */
+.pos-form-box {
+  background-color: var(--pos-surface-subtle);
+  border: 1px solid var(--pos-border);
+  border-radius: 10px;
+  padding: 0.85rem 1rem;
+}
+
+.pos-form-caption {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--pos-text-muted);
+  margin-bottom: 0.55rem;
+}
+
+.pos-table th {
+  font-size: 0.76rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--pos-text-muted);
+  background-color: var(--pos-surface-subtle);
+  border-bottom: 1px solid var(--pos-border);
+}
+
+.pos-table td {
+  border-bottom: 1px solid var(--pos-border);
+  font-size: 0.9rem;
+}
+
+.pos-table tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.pos-table-padded th,
+.pos-table-padded td {
+  padding: 0.75rem 1.25rem;
+}
+
+.pos-status-pill {
+  display: inline-block;
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.pos-status-active {
+  background-color: var(--pos-success-bg);
+  color: var(--pos-success-text);
+}
+
+.pos-status-inactive {
+  background-color: #efece7;
+  color: var(--pos-text-muted);
+}
+
+.pos-status-online {
+  background-color: var(--pos-online-bg);
+  color: var(--pos-online-text);
+}
+
+.pos-demo-banner {
+  background-color: #fffbeb;
+  border: 1px solid #fde68a;
+  color: #92400e;
+  border-radius: 10px;
+  padding: 0.7rem 1rem;
+  font-size: 0.86rem;
+}
+
+.pos-empty-state {
+  text-align: center;
+  color: var(--pos-text-muted);
+  padding: 2.25rem 1rem;
+  font-size: 0.9rem;
+}
+
+/* Confirmed Receipt Banner */
+.pos-receipt-banner {
+  border-color: #86efac;
+}
+
+.pos-receipt-banner-header {
+  background-color: #166534;
+  color: #ffffff;
+  padding: 0.65rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.pos-check-badge {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.78rem;
+}
+
+.pos-receipt-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+  font-size: 0.84rem;
+  color: var(--pos-text-muted);
+}
+
+/* KPI Summary Cards */
+.pos-kpi-card {
+  padding: 1.2rem 1.35rem;
+}
+
+.pos-kpi-highlight {
+  border-color: var(--pos-accent);
+  background: linear-gradient(180deg, #ffffff 0%, var(--pos-accent-tint) 100%);
+}
+
+.pos-kpi-label {
+  font-size: 0.76rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--pos-text-muted);
+}
+
+.pos-kpi-value {
+  font-size: 1.85rem;
+  font-weight: 800;
+  color: var(--pos-espresso);
+  margin-top: 0.35rem;
+}
+
+.pos-kpi-highlight .pos-kpi-value {
+  color: var(--pos-accent);
+}
+
+.pos-kpi-date {
+  font-size: 1.45rem;
+  margin-top: 0.55rem;
+}
+
+.pos-share-track {
+  width: 100%;
+  max-width: 180px;
+  height: 8px;
+  background-color: #ece7df;
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.pos-share-fill {
+  height: 100%;
+  background-color: var(--pos-accent);
+  border-radius: 999px;
+}
+
+/* Modal Receipt Dialog */
+.brew-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(20, 16, 13, 0.55);
+  backdrop-filter: blur(2px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  z-index: 1050;
+}
+
+.brew-modal-dialog {
+  width: 100%;
+  max-width: 34rem;
+  max-height: 90vh;
+  overflow-y: auto;
+  background-color: var(--pos-surface);
+  border-radius: var(--pos-radius);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.25);
+}
+
+.pos-receipt-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.75rem;
+  padding: 0.75rem 0.9rem;
+  background-color: var(--pos-surface-subtle);
+  border: 1px solid var(--pos-border);
+  border-radius: var(--pos-radius-sm);
+  font-size: 0.85rem;
+}
+
+@media (max-width: 575.98px) {
+  .pos-receipt-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.pos-meta-label {
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--pos-text-muted);
+}
+
+.pos-receipt-total-row td {
+  padding-top: 0.85rem;
+  border-top: 2px solid var(--pos-espresso);
+}
