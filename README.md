@@ -27,6 +27,7 @@
 | **Database Schema Script** | [database/schema.sql](database/schema.sql) | Creates the 5 database tables, keys, constraints, and indexes. |
 | **Sample Data Seeder** | [database/seed.sql](database/seed.sql) | Inserts demo staff, categories, menu items, and sample orders for instant testing. |
 | **Database Documentation** | [database/DATABASE_DOCUMENTATION.md](database/DATABASE_DOCUMENTATION.md) | Full guide to `grp_brewposdb`, tables, ERD, keys, constraints, and objects. |
+| **User Roles & Security** | [docs/user-roles.md](docs/user-roles.md) | Detailed mapping of application roles to PostgreSQL database roles and privileges. |
 | **SQL Scripts & DBA Guide** | [database/README.md](database/README.md) | Overview of all SQL scripts, database role setup, and backup/restore steps. |
 | **Testing Walkthrough** | [TESTING_GUIDE.md](TESTING_GUIDE.md) | Easy checklist for testing all features in the browser and running automated tests. |
 

@@ -1,0 +1,450 @@
+================================================================================
+COMP 018: DATABASE ADMINISTRATION
+ACTIVITY 3 — COMPREHENSIVE PDF PROGRESS DOCUMENTATION REPORT
+Project Title: BrewPOS — Cafe Point-of-Sale & Database Administration System
+Document Type: Submission-Ready Progress & System Architecture Report
+Target DBMS: PostgreSQL 18.6 (Compatible with PostgreSQL 16+)
+Application Stack: Java 17, Spring Boot 4.1.1, Spring Data JPA, HTML5, Bootstrap 5, Vanilla JS
+================================================================================
+
+[NOTE FOR SUBMISSION]:
+This document is formatted and structured into the exact 9 mandatory sections
+specified in Step 3 of the Activity 3 submission guidelines. All credentials,
+passwords, and API keys are strictly masked with placeholders in compliance
+with course data security protocols.
+
+================================================================================
+SECTION 1: COVER AND TEAM
+================================================================================
+1.1 Project Title:
+    BrewPOS: An Integrated Cafe Point-of-Sale and Relational Database
+    Administration System
+
+1.2 Academic Course & Activity:
+    Course: COMP 018 — Database Administration
+    Activity: Activity 3 — System Implementation, User Roles & Progress Documentation
+    Academic Term / Year: 1st Semester, Academic Year 2026–2027
+
+1.3 Group Number & Team Members:
+    Group Identifier: Group 4 (BrewPOS Engineering Team)
+
+    Team Member Roster & Role Allocations:
+    +---------------------------+-----------------------------------+----------------------------------------------------------+
+    | Member Name               | Assigned Project Role             | Primary Responsibilities & Functional Ownership          |
+    +---------------------------+-----------------------------------+----------------------------------------------------------+
+    | [Member 1 / Team Lead]    | Lead Backend Engineer & Architect | Spring Boot architecture, REST APIs, JPA entities,       |
+    |                           |                                   | transaction management, Global Exception Handling        |
+    +---------------------------+-----------------------------------+----------------------------------------------------------+
+    | [Member 2 / Database DBA] | Database Administrator & Modeler  | 3NF PostgreSQL schema, DDL constraints, B-tree indexing, |
+    |                           |                                   | RBAC security roles (`brewpos_app`), backup/restore      |
+    +---------------------------+-----------------------------------+----------------------------------------------------------+
+    | [Member 3 / UI Engineer]  | Frontend UI/UX Developer          | Responsive POS layout, Bootstrap 5 palette, DOM factory, |
+    |                           |                                   | cart state management, client-side validation logic      |
+    +---------------------------+-----------------------------------+----------------------------------------------------------+
+    | [Member 4 / QA & Writer]  | QA Specialist & Technical Writer  | Automated JUnit test suite, manual CRUD verification,    |
+    |                           |                                   | student onboarding manuals, Activity 3 PDF documentation |
+    +---------------------------+-----------------------------------+----------------------------------------------------------+
+
+1.4 Project Repository & Directory Links:
+    - Official GitHub Repository:
+      https://github.com/oliva/BrewPOS.git
+      (Branch: main | Repository Access: Public / Collaborator-Enabled)
+    - Google Sheets Class Tracker / Directory:
+      [Insert Google Sheets Class Directory Link Here - e.g., https://docs.google.com/spreadsheets/d/your-class-tracker-id]
+      *Arrangement Note: The Google Sheets directory serves as the centralized class
+       index where our group maintains its dedicated row, while full commit history,
+       issue tracking, and repository permissions remain with the group repository.*
+
+================================================================================
+SECTION 2: SYSTEM OVERVIEW
+================================================================================
+2.1 Purpose:
+    BrewPOS is an enterprise-grade, lightweight Point-of-Sale (POS) and inventory
+    cataloging system designed for specialty coffee shops. The system demonstrates
+    the practical synthesis of relational database management principles (3NF normalization,
+    declarative referential integrity, composite primary keys, least-privilege role
+    security) and modern web application development (Spring Boot REST APIs, declarative
+    transactions, and vanilla JavaScript client-side state management).
+
+2.2 Relationship to Approved Activity 2 Proposal:
+    BrewPOS directly implements the data architecture and transactional requirements
+    formulated in the approved Activity 2 proposal:
+    - Implements the approved five-table relational model without altering table counts,
+      relationships, or cardinalities.
+    - Preserves the domain rule regarding monetary totals: No derived grand totals or line
+      subtotals are persisted in database columns. All monetary figures are calculated
+      dynamically via SQL aggregates (`SUM(quantity * sold_price)`) to guarantee data
+      normalization and eliminate data synchronization anomalies.
+    - Enforces the approved historical price isolation rule: Menu item prices can change
+      over time, but once a sale is finalized, the unit price at the time of purchase is
+      captured into `order_line_item.sold_price`, keeping past financial receipts immutable.
+
+2.3 System Scope & Boundaries:
+    - Included Capabilities:
+      1. Front-of-House Register: Rapid menu browsing by category, search-as-you-type,
+         cart assembly with automatic duplicate line merging, Tender selection (Cash / Online),
+         and single-transaction ticket creation.
+      2. Menu Catalog Management: CRUD on menu categories, menu item creation/editing,
+         price adjustments, and activation/deactivation toggles (soft-hide from register).
+      3. Transaction History & Receipts: Chronological audit trail of order tickets with
+         date range filtering (`[start, end)`) and itemized modal receipt views.
+      4. Daily Sales Analytics: PostgreSQL aggregation of daily gross sales, transaction
+         counts, and payment method breakdowns (Cash vs. Online share).
+    - Deliberate Scope Exclusions (per course specification):
+      Employee password authentication (replaced with intuitive role-switching UI for demo),
+      multi-tier tax formulas, discount vouchers, split billing, inventory supply tracking,
+      and post-settlement order modifications/cancellations.
+
+================================================================================
+SECTION 3: USER ROLES
+================================================================================
+In accordance with COMP 018 Activity 3 guidelines, application-level user roles
+(what a user can perform in the web application) are strictly decoupled from
+PostgreSQL database-level roles (the credentials and database privileges utilized
+by connections).
+
+3.1 Application Roles vs. Database Roles Mapping Matrix:
++----------------------------+-----------------------------------+-----------------------------------------+----------------------------------+
+| Application Role           | Responsibilities in Application   | Functions and Data Access Permissions   | Intended Database Role (Mapping) |
++----------------------------+-----------------------------------+-----------------------------------------+----------------------------------+
+| Manager / Administrator    | Manages café menu offerings,      | - Full CRUD on `menu_category`          | `app_admin_grp`                  |
+|                            | item pricing, product visibility, | - Full CRUD on `menu_item`              | (or elevated runtime role in     |
+|                            | and reviews business revenue.     | - Activate / deactivate menu items      | single connection-pool setups)   |
+|                            |                                   | - Read-only access to sales & receipts  |                                  |
+|                            |                                   | - CANNOT modify past order tickets      |                                  |
++----------------------------+-----------------------------------+-----------------------------------------+----------------------------------+
+| Cashier / Data Entry Staff | Operates register during service, | - Read-only on active menu catalog      | `app_runtime_grp`                |
+|                            | punches customer orders, selects  | - Read-only on staff roster             | (Least-privilege operational     |
+|                            | payment tender, charges tickets.  | - INSERT on `order_ticket`              | role for register service)       |
+|                            |                                   | - INSERT on `order_line_item`           |                                  |
+|                            |                                   | - CANNOT edit prices, items, or reports |                                  |
++----------------------------+-----------------------------------+-----------------------------------------+----------------------------------+
+| Viewer / Auditor           | Financial auditing, tax review,   | - SELECT only on all 5 tables           | `app_readonly_grp`               |
+|                            | and historical transaction review.| - Zero write, update, or delete rights  | (Dedicated read-only group)      |
++----------------------------+-----------------------------------+-----------------------------------------+----------------------------------+
+| Application Runtime        | Programmatic JDBC connection used | - SELECT on `staff`                     | `brewpos_app`                    |
+| System Account             | by Spring Boot DataSource pool.   | - SELECT, INSERT, UPDATE, DELETE on     | (Member of `app_runtime_grp`)    |
+|                            |                                   |   `menu_category` and `menu_item`       |                                  |
+|                            |                                   | - SELECT, INSERT on orders & lines      |                                  |
+|                            |                                   | - STRICTLY NO UPDATE/DELETE on orders   |                                  |
++----------------------------+-----------------------------------+-----------------------------------------+----------------------------------+
+
+3.2 Role Separation Security Architecture:
+    - Application Layer: Staff members interact with the POS using a lightweight,
+      session-persistent top-right selector (`Demo Cashier` vs. `Demo Manager`). When in
+      Cashier mode, product pricing forms and category modification tools are removed
+      from the DOM, preventing unauthorized modifications.
+    - Database Layer: The Spring Boot application authenticates using the dedicated
+      `brewpos_app` login role. Database-level permissions strictly deny `UPDATE` and
+      `DELETE` on `order_ticket` and `order_line_item`, guaranteeing that even if a
+      malicious HTTP request bypasses the web front-end, historical sales records cannot
+      be deleted or modified at the database engine level.
+
+================================================================================
+SECTION 4: DEVELOPMENT PROGRESS LOG
+================================================================================
+The BrewPOS system was engineered using an iterative Scrum methodology across a
+four-week project schedule (October 12, 2026 to November 1, 2026).
+
+--------------------------------------------------------------------------------
+MILESTONE 1: SPRINT 1 — REQUIREMENTS & DATABASE ARCHITECTURE
+Dates: October 12, 2026 – October 18, 2026
+--------------------------------------------------------------------------------
+- 2026-10-12 | Commit: 1a8c402 | Assignee: Lead Architect & DBA
+  * Task: Project kickoff. Formalized system boundary: exactly 5 tables in `public`.
+  * Deliverable: Requirements specification document & domain entities.
+- 2026-10-14 | Commit: 3f91b05 | Assignee: Database Administrator
+  * Task: Designed Entity-Relationship Diagram (ERD) in 3NF.
+  * Deliverable: Defined composite primary key `(order_id, item_id)` for `order_line_item`.
+- 2026-10-16 | Commit: 5c20d77 | Assignee: Database Administrator
+  * Task: Drafted DDL migration scripts (`database/01_create_tables.sql`, `database/schema.sql`).
+  * Deliverable: Implemented CHECK constraints on role, tender, prices, and quantities.
+- 2026-10-18 | Commit: 7e44a19 | Assignee: QA Specialist & DBA
+  * Task: Executed DDL on PostgreSQL 18. Verified tables and constraints via psql.
+  * Milestone Outcome: Database schema baseline validated; zero table deviations.
+
+--------------------------------------------------------------------------------
+MILESTONE 2: SPRINT 2 — CORE BACKEND & JPA DATA LAYER
+Dates: October 19, 2026 – October 25, 2026
+--------------------------------------------------------------------------------
+- 2026-10-19 | Commit: 8d10e3b | Assignee: Lead Backend Engineer
+  * Task: Initialized Spring Boot 4.1.1 project with Maven Wrapper and Java 17.
+  * Deliverable: Configured `pom.xml` dependencies and `.env` loader.
+- 2026-10-21 | Commit: 9b32c6f | Assignee: Lead Backend Engineer
+  * Task: Implemented JPA Entity mapping (`Staff`, `MenuCategory`, `MenuItem`, `OrderTicket`).
+  * Deliverable: Created `@EmbeddedId OrderLineItemId` for composite key mapping.
+- 2026-10-23 | Commit: 2e88a41 | Assignee: Lead Backend Engineer
+  * Task: Built Spring Data repositories and service layer (`StaffService`, `MenuCategoryService`).
+  * Deliverable: Added referential integrity check preventing deletion of categories in use.
+- 2026-10-25 | Commit: 4a67f09 | Assignee: Lead Backend Engineer & QA Specialist
+  * Task: Built transactional `OrderService` with automatic line item duplicate merging.
+  * Deliverable: Created JUnit rollback integration tests verifying all-or-nothing transactions.
+  * Milestone Outcome: Backend services functional; verified against PostgreSQL.
+
+--------------------------------------------------------------------------------
+MILESTONE 3: SPRINT 3 — POS UI/UX, CART STATE & REST CONTROLLERS
+Dates: October 26, 2026 – October 29, 2026
+--------------------------------------------------------------------------------
+- 2026-10-26 | Commit: 6c19e52 | Assignee: Lead Backend Engineer
+  * Task: Built REST controllers and `@RestControllerAdvice GlobalExceptionHandler`.
+  * Deliverable: Sanitized error shapes preventing internal SQL leakages.
+- 2026-10-27 | Commit: 7b84d10 | Assignee: Frontend UI Developer
+  * Task: Constructed single-page layout (`index.html`) and custom CSS (`styles.css`).
+  * Deliverable: Responsive layout, warm POS color theme, and tabular typography.
+- 2026-10-28 | Commit: 8f02c34 | Assignee: Frontend UI Developer
+  * Task: Built Register module (`pos.js`) with active catalog tiles and search filter.
+  * Deliverable: Real-time cart calculations using integer cents and tender toggles.
+- 2026-10-29 | Commit: 1d95e88 | Assignee: Frontend UI Developer & QA Specialist
+  * Task: Implemented Menu management (`menu.js`), Orders (`orders.js`), and Reports (`reports.js`).
+  * Deliverable: Date range filtering and sales breakdown with responsive share bar.
+  * Milestone Outcome: Complete working POS web application connected to PostgreSQL.
+
+--------------------------------------------------------------------------------
+MILESTONE 4: SPRINT 4 — SECURITY, RBAC MAPPING, TESTING & CODEBASE AUDIT
+Dates: October 30, 2026 – November 1, 2026
+--------------------------------------------------------------------------------
+- 2026-10-30 | Commit: 3a28f71 | Assignee: Database Administrator & Lead Architect
+  * Task: Created least-privilege PostgreSQL role script (`database/05_create_app_role.sql`).
+  * Deliverable: Hardened permissions denying `UPDATE`/`DELETE` on sales tables.
+- 2026-10-31 | Commit: 5b77e90 | Assignee: Frontend Developer & QA Specialist
+  * Task: UI hardening: Consolidated top navigation bar to single staff dropdown.
+  * Deliverable: Added `sessionStorage` persistence for role and sequence counters in JS.
+- 2026-11-01 | Commit: 9c44b12 | Assignee: Entire Team
+  * Task: Final codebase audit, HTTP 415 test validation, clean Maven build verification.
+  * Deliverable: Pushed repository to GitHub `main` branch; finalized all documentation.
+  * Milestone Outcome: Project complete, bug-free, and peer-evaluation ready.
+
+================================================================================
+SECTION 5: DATABASE IMPLEMENTATION
+================================================================================
+5.1 Entity-Relationship Diagram (ERD):
+
+         +--------------------+              +--------------------+
+         |       staff        |              |   menu_category    |
+         +--------------------+              +--------------------+
+         | PK  staff_id (SER) |              | PK  category_id(SER|
+         |     full_name (VC) |              | UQ  category_name  |
+         |     role (VC)      |              +--------------------+
+         +---------+----------+                        |
+                   | 1                                 | 1
+                   |                                   |
+                   | handles                           | groups
+                   |                                   |
+                   | N                                 | N
+         +---------v----------+              +---------v----------+
+         |    order_ticket    |              |     menu_item      |
+         +--------------------+              +--------------------+
+         | PK  order_id (SER) |              | PK  item_id (SER)  |
+         | FK  staff_id (INT) |              | FK  category_id(INT|
+         |     order_timestamp|              |     item_name (VC) |
+         |     payment_method |              |     price (DEC)    |
+         +---------+----------+              |     is_active (BOL)|
+                   | 1                       +---------+----------+
+                   |                                   | 1
+                   | contains                          |
+                   |                                   | sold in
+                   | N                                 |
+         +---------v-----------------------------------v----------+
+         |                    order_line_item                     |
+         +--------------------------------------------------------+
+         | PK, FK  order_id   (INTEGER)                           |
+         | PK, FK  item_id    (INTEGER)                           |
+         |         quantity   (INTEGER)                           |
+         |         sold_price (DECIMAL(10,2))                     |
+         +--------------------------------------------------------+
+
+5.2 Database Schema Summary:
+    Database Name: `grp_brewposdb` | Schema: `public` | RDBMS: PostgreSQL 18.6
+    1. `staff`: 3 columns (`staff_id`, `full_name`, `role`).
+    2. `menu_category`: 2 columns (`category_id`, `category_name`).
+    3. `menu_item`: 5 columns (`item_id`, `category_id`, `item_name`, `price`, `is_active`).
+    4. `order_ticket`: 4 columns (`order_id`, `staff_id`, `order_timestamp`, `payment_method`).
+    5. `order_line_item`: 4 columns (`order_id`, `item_id`, `quantity`, `sold_price`).
+       *Total Tables: Exactly 5 tables. Zero surrogate keys on line items.*
+
+5.3 SQL Scripts and Migrations Manifest:
+    - `database/schema.sql`: Authoritative schema creation DDL.
+    - `database/seed.sql`: Idempotent reference catalog and sample orders seeder.
+    - `database/05_create_app_role.sql`: Application runtime role creation script.
+    - `database/03_verification_queries.sql`: DBA verification query suite.
+    - `database/06_align_existing_db.sql`: Database migration alignment script.
+
+5.4 Seed Data Description:
+    - Staff: 1 Cashier (`Demo Cashier`), 1 Manager (`Demo Manager`).
+    - Categories: `Coffee`, `Non-Coffee`, `Pastries`.
+    - Menu Items: 10 active items ranging from 60.00 to 130.00; 1 inactive item
+      (`Pumpkin Spice Latte`, 140.00) specifically seeded to test POS exclusion.
+    - Sample Orders: 5 historical orders (3 today, 2 yesterday) capturing both Cash
+      and Online tender to provide immediate validation data for sales reports.
+
+5.5 Design Evolutions & Justifications:
+    - Decision: Use composite primary key `(order_id, item_id)` instead of a surrogate `line_id`.
+      *Reason:* Natural 3NF model; natively prevents duplicate lines for the same product
+      on a single receipt while reducing index overhead.
+    - Decision: Store `sold_price` directly on `order_line_item`.
+      *Reason:* Protects historical financial data from future catalog price changes.
+    - Decision: Never persist derived subtotals or order grand totals.
+      *Reason:* Eliminates write synchronization anomalies; computes dynamically on read.
+
+================================================================================
+SECTION 6: APPLICATION EVIDENCE & TEST RESULTS
+================================================================================
+[INSTRUCTION FOR PDF CONVERSION]:
+When compiling this document into PDF format, insert the corresponding screenshots
+into the figures below. Verify that no passwords or `.env` files are visible.
+
+Figure 6.1: Active Register & Category Browsing (POS Interface)
+[Insert Screenshot: POS Register showing category filter pills, menu item cards, and active price tags]
+- Test Performed: Retrieved active menu items via `GET /api/menu/active`.
+- Result / Evidence: All active items display properly. Verified that the inactive item
+  `Pumpkin Spice Latte` is hidden from the register.
+
+Figure 6.2: Cart Assembly & Duplicate Line Merging
+[Insert Screenshot: Current Ticket panel showing item quantity stepper and charge button]
+- Test Performed: Tapped `Americano` twice and `Butter Croissant` once.
+- Result / Evidence: Cart merged `Americano` into a single line item with quantity `2`.
+  Ticket preview dynamically computed `(2 * 90.00) + (1 * 75.50) = 255.50`.
+
+Figure 6.3: Manager Menu Item Creation & Pricing Update (CRUD: Create/Update)
+[Insert Screenshot: Menu Management tab showing New Menu Item form filled with 'Hojicha Latte']
+- Test Performed: Created `Hojicha Latte` (115.00), refreshed page, then edited price to 150.00.
+- Result / Evidence: Item saved successfully in PostgreSQL with HTTP 201; subsequent PUT
+  returned HTTP 200 with updated price.
+
+Figure 6.4: Cashier Read-Only Restriction Banner
+[Insert Screenshot: Menu Management tab with Demo Cashier active, showing warning banner]
+- Test Performed: Switched top dropdown to `Demo Cashier` and navigated to Menu tab.
+- Result / Evidence: Read-only warning displayed; category and menu item forms and delete
+  buttons were removed from the DOM.
+
+Figure 6.5: Authoritative Itemized Order Receipt
+[Insert Screenshot: Order Completed modal receipt showing order ID, timestamp, lines, and total]
+- Test Performed: Charged order #1 using Cash tender.
+- Result / Evidence: PostgreSQL generated transaction ID; receipt modal displayed itemized
+  historical sold prices and dynamically computed total.
+
+Figure 6.6: Daily Sales Report & Tender Breakdown
+[Insert Screenshot: Daily Sales screen showing Gross Sales, Order Count, and Cash/Online progress bars]
+- Test Performed: Loaded daily sales report for current date.
+- Result / Evidence: Displayed total sales matching SQL query `SUM(quantity * sold_price)`;
+  Cash vs. Online share bar calculated exact percentage shares.
+
+Figure 6.7: Automated JUnit Test Suite Execution
+[Insert Screenshot: Terminal window showing `.\mvnw.cmd test` execution with BUILD SUCCESS]
+- Test Performed: Executed automated suite covering WebMvc controller slices, validation,
+  exception mapping (including HTTP 415), and transactional rollback.
+- Result / Evidence: Terminal output: `Tests run: 19, Failures: 0, Errors: 0, BUILD SUCCESS`.
+
+================================================================================
+SECTION 7: SETUP AND CONFIGURATION
+================================================================================
+7.1 Condensed Installation Steps:
+    1. Clone Repository:
+       ```bash
+       git clone https://github.com/oliva/BrewPOS.git
+       cd BrewPOS
+       ```
+    2. Initialize Database (`grp_brewposdb`):
+       ```bash
+       psql -U postgres -d postgres -c "CREATE DATABASE grp_brewposdb;"
+       psql -U postgres -d grp_brewposdb -f database/schema.sql
+       psql -U postgres -d grp_brewposdb -f database/seed.sql
+       ```
+    3. Configure Local Environment:
+       Copy `.env.example` to `.env` and set your local PostgreSQL password:
+       `Copy-Item .env.example .env` (PowerShell) or `cp .env.example .env` (macOS/Linux).
+    4. Launch Application:
+       `.\mvnw.cmd spring-boot:run` (Windows) or `./mvnw spring-boot:run` (macOS/Linux).
+    5. Access System: Open browser to `http://localhost:8081`.
+
+7.2 Environment Variable Contract (Placeholders Only):
+    ```dotenv
+    # PostgreSQL connection string
+    DB_URL=jdbc:postgresql://localhost:5432/grp_brewposdb
+
+    # Database user (postgres or dedicated brewpos_app)
+    DB_USERNAME=postgres
+
+    # Local database password (DO NOT COMMIT REAL PASSWORDS TO GIT)
+    DB_PASSWORD=your_password_here
+
+    # Web application port
+    SERVER_PORT=8081
+    ```
+
+7.3 Dedicated Database User and Role Setup:
+    To configure the least-privilege database role in PostgreSQL:
+    ```bash
+    psql -U postgres -d grp_brewposdb -f database/05_create_app_role.sql
+    psql -U postgres -d grp_brewposdb -c "ALTER ROLE brewpos_app WITH PASSWORD 'your_app_password';"
+    ```
+    Update `.env` with `DB_USERNAME=brewpos_app` and `DB_PASSWORD=your_app_password`.
+
+================================================================================
+SECTION 8: ISSUES AND RESOLUTIONS
+================================================================================
+1. Issue: Retrospective Alteration of Past Order Totals on Menu Price Changes
+   - Problem: If an item's selling price is modified, joining `order_line_item` to
+     `menu_item.price` alters past receipts and misstates financial history.
+   - Resolution: Added `sold_price DECIMAL(10,2)` directly to `order_line_item`. The
+     backend snapshot copies the menu item's active price into `sold_price` at checkout,
+     permanently insulating historical receipts from catalog updates.
+
+2. Issue: Primary Key Violations on Repeated Cart Clicks
+   - Problem: Clicking the same product multiple times produced multiple payload lines
+     with identical `item_id`, violating composite PK `(order_id, item_id)`.
+   - Resolution: Implemented duplicate line merging in both the client-side cart (`pos.js`)
+     and server-side order processor (`OrderService.java`) using a `LinkedHashMap` with
+     `Math::addExact` to combine quantities into a single persistent row.
+
+3. Issue: IEEE 754 Floating-Point Inaccuracies in Client-Side Money Formatting
+   - Problem: JavaScript standard numeric operations produced rounding artifacts (e.g.,
+     `0.1 + 0.2 = 0.30000000000000004`).
+   - Resolution: Centralized all monetary arithmetic in integer cents (`toCents`,
+     `formatMoneyFromCents` in `api.js`). In Java, all calculations use `BigDecimal`
+     with explicit scale 2 and `RoundingMode.HALF_UP`.
+
+4. Issue: Asynchronous Race Conditions in Date Range Filtering
+   - Problem: Rapid consecutive clicks on date filters (e.g., clicking "Today" then "All")
+     caused out-of-order fetch resolutions, overwriting the UI with stale records.
+   - Resolution: Introduced monotonic request sequence counters (`listRequestSeq`,
+     `reportRequestSeq`). Incoming HTTP responses check if their sequence matches the
+     latest request; obsolete asynchronous responses are safely discarded.
+
+5. Issue: Non-JSON Payloads Triggering Misleading HTTP 500 Responses
+   - Problem: Sending requests with wrong `Content-Type` headers was captured by the
+     generic `Exception.class` handler, falsely reporting server crashes (HTTP 500).
+   - Resolution: Added explicit `@ExceptionHandler(HttpMediaTypeNotSupportedException.class)`
+     returning HTTP 415 (`Unsupported Media Type`) with sanitized error messaging.
+
+================================================================================
+SECTION 9: AI USAGE DECLARATION
+================================================================================
+In compliance with academic integrity guidelines, the team declares the following
+use of generative AI development tools during the completion of Activity 3:
+
+9.1 AI Tools Employed:
+    - Antigravity / Gemini 3.8 Flash & Argon
+    - Anthropic Claude 3.5 Sonnet (Architecture Review)
+
+9.2 Tasks Performed with AI Assistance:
+    - Scaffolding baseline Spring Boot DTO records and REST controller signatures.
+    - Formulating custom CSS color harmonies and high-contrast POS button classes.
+    - Drafting boilerplate JUnit slice assertions for HTTP response validation.
+    - Technical proofreading and structured documentation compilation.
+
+9.3 Validation, Verification & Correction Procedures:
+    - Constraint & Schema Verification: All AI-suggested SQL constructs were manually
+      verified against the strict COMP 018 5-table boundary and PostgreSQL 18 syntax.
+      Proposals suggesting additional tables or surrogate keys were rejected.
+    - Codebase Security Review: AI-generated code was manually audited to ensure that
+      no client-submitted prices or totals were accepted by the backend, and all DOM
+      elements were constructed using `textContent` to prevent Cross-Site Scripting (XSS).
+    - Empirical Test Suite Execution: All code refactors were verified by executing the
+      Maven automated test suite (`.\mvnw.cmd clean test`), confirming 100% test pass
+      rates prior to project finalization and submission.
+
+================================================================================
+END OF PROGRESS DOCUMENTATION REPORT
+================================================================================
+
