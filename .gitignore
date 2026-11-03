@@ -50,3 +50,8 @@ desktop.ini
 
 ### Spring Initializr leftovers ###
 HELP.md
+
+### PDF submission drafts (kept locally for compiling the PDF report, excluded from GitHub) ###
+DOCUMENTATION_AND_PROJECT_PROGRESS.txt
+PDF_PROGRESS_DOCUMENTATION.txt
+
