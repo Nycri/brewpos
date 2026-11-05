@@ -962,7 +962,7 @@ Below are the exact values to record in the class Google Sheets tracker:
 | **Database setup result** | Success (Initialized PostgreSQL 18.6 on port 5432, loaded 8 tables, categories, demo records, and configured least-privilege roles). |
 | **Access-control folder link** |  |
 | **Access-control status** | Completed |
-| **Feedback sent to owners** |  (05/11/2026) |
+| **Feedback sent to owners** | (05/11/2026) |
 | **PDF progress document** |  |
 | **Last updated** | 2026-11-05 |
 
@@ -992,7 +992,7 @@ Below are the exact values to record in the class Google Sheets tracker:
 | **Recovery simulation result** | Recovered (Simulated deleted test item successfully restored from verified baseline state) |
 | **Proposed RPO and RTO** | RPO: 1 hour, RTO: 30 minutes |
 | **Evidence folder link** |  |
-| **Feedback sent to owners** |  (05/11/2026) |
+| **Feedback sent to owners** | (05/11/2026) |
 | **PDF progress document** | |
 | **Last updated** | 2026-11-05 |
 
@@ -1000,7 +1000,7 @@ Below are the exact values to record in the class Google Sheets tracker:
 
 # AI USAGE DECLARATION
 
-- **AI Tools Used:** Google Gemini 3.8 Flash (via Antigravity AI assistant).
+- **AI Tools Used:** Google Gemini 3.8 Flash.
 - **Tasks Performed:** 
   1. Inspecting database schema definitions, constraints, and relationship hierarchies for Group 5's PUP-SPOT system.
   2. Formulating and executing PostgreSQL least-privilege verification test suites for Activity 4 (public vs. staff separation).
