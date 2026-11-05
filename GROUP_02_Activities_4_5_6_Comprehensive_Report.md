@@ -919,10 +919,10 @@ Below are the exact values to record in the class Google Sheets tracker:
 | **Project** | Group 2 - Park-It: Parking Management System |
 | **Repository cloned** | `https://github.com/millerdevera6-glitch/park-it-database`, Branch: `main` |
 | **Database setup result** | Success (Verified PostgreSQL 18.6 on port 5432, schema built with 5 tables, populated sample data, configured least-privilege roles). |
-| **Access-control folder link** | `https://github.com/Nycri/brewpos/tree/main/db-access-control/group-02-parkit/` |
+| **Access-control folder link** |  |
 | **Access-control status** | Completed |
-| **Feedback sent to owners** | Yes (05/11/2026) |
-| **PDF progress document** | *(Link to your group's shared PDF document)* |
+| **Feedback sent to owners** |  (05/11/2026) |
+| **PDF progress document** |  |
 | **Last updated** | 2026-11-05 |
 
 ### Activity 5 Log Tab
@@ -935,9 +935,9 @@ Below are the exact values to record in the class Google Sheets tracker:
 | **Maintenance performed** | `ANALYZE; VACUUM (VERBOSE, ANALYZE) on parking_zone, transaction, payment via postgres` |
 | **Query analyzed** | Parking zone occupancy lookup (Seq scan, 0.050 ms, 4 buffer hits) & Multi-table vehicle stay join (Hash joins, 0.378 ms) |
 | **Recommendation priority** | No action required (Current queries execute in < 0.38 ms with 100% buffer cache hits) |
-| **Evidence folder link** | `https://github.com/Nycri/brewpos/tree/main/db-maintenance/group-02-parkit/` |
-| **Feedback sent to owners** | Yes (05/11/2026) |
-| **PDF progress document** | *(Link to your group's shared PDF document)* |
+| **Evidence folder link** |  |
+| **Feedback sent to owners** |  (05/11/2026) |
+| **PDF progress document** |  |
 | **Last updated** | 2026-11-05 |
 
 ### Activity 6 Log Tab
@@ -950,16 +950,16 @@ Below are the exact values to record in the class Google Sheets tracker:
 | **Access control after restore** | Yes (Activity 4 roles and permissions validated; `parkit_report_user` denied reading `staff_user`) |
 | **Recovery simulation result** | Recovered (Simulated deleted test parking zone successfully restored from baseline state) |
 | **Proposed RPO and RTO** | RPO: 30 minutes, RTO: 1 hour |
-| **Evidence folder link** | `https://github.com/Nycri/brewpos/tree/main/db-backup-recovery/group-02-parkit/` |
-| **Feedback sent to owners** | Yes (05/11/2026) |
-| **PDF progress document** | *(Link to your group's shared PDF document)* |
+| **Evidence folder link** | |
+| **Feedback sent to owners** |  (05/11/2026) |
+| **PDF progress document** |  |
 | **Last updated** | 2026-11-05 |
 
 ---
 
 # AI USAGE DECLARATION
 
-- **AI Tools Used:** Google Gemini 3.8 Flash (via Antigravity AI assistant).
+- **AI Tools Used:** Google Gemini 3.8 Flash.
 - **Tasks Performed:** 
   1. Inspecting database schema definitions, constraints, and relationship hierarchies for Group 2's Park-It system.
   2. Formulating and executing PostgreSQL least-privilege verification test suites for Activity 4.
