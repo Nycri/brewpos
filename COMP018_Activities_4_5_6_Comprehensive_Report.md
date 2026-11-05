@@ -803,8 +803,8 @@ Below are the exact values to record in your group's copy of the class Google Sh
 | **Database setup result** | Success (Port 8080 collision with local PEMHTTPD identified; resolved by port remapping to 8081). All 7 tables and seed data verified. |
 | **Access-control folder link** | `https://github.com/Nycri/brewpos/tree/main/db-access-control/group-08-bwisit/` |
 | **Access-control status** | Completed |
-| **Feedback sent to owners** | Yes (04/11/2026) |
-| **PDF progress document** | *(Link to your group's shared PDF document)* |
+| **Feedback sent to owners** | (04/11/2026) |
+| **PDF progress document** |  |
 | **Last updated** | 2026-11-04 |
 
 ### Activity 5 Log Tab
@@ -818,8 +818,8 @@ Below are the exact values to record in your group's copy of the class Google Sh
 | **Query analyzed** | Vendor incoming orders lookup with student and queue join (Seq Scan + Hash Join, < 0.15 ms) |
 | **Recommendation priority** | No action required (Follow-up index on `customer_order(vendor_id, order_date DESC)` when orders exceed 10,000) |
 | **Evidence folder link** | `https://github.com/Nycri/brewpos/tree/main/db-maintenance/group-08-bwisit/` |
-| **Feedback sent to owners** | Yes (04/11/2026) |
-| **PDF progress document** | *(Link to your group's shared PDF document)* |
+| **Feedback sent to owners** | (04/11/2026) |
+| **PDF progress document** |  |
 | **Last updated** | 2026-11-04 |
 
 ### Activity 6 Log Tab
@@ -841,12 +841,12 @@ Below are the exact values to record in your group's copy of the class Google Sh
 
 # AI USAGE DECLARATION
 
-- **AI Tools Used:** Google Gemini 3.8 Flash (via Antigravity AI assistant).
+- **AI Tools Used:** Google Gemini 3.8 Flash.
 - **Tasks Performed:** 
   1. Inspecting database schema definitions and relationship hierarchies.
   2. Formulating PostgreSQL role creation and least-privilege permission grants for Activity 4.
   3. Diagnosing runtime maintenance boundaries and execution plan buffer statistics for Activity 5.
   4. Formulating backup procedures, checksum generation scripts, and diagnosing post-restore foreign key schema usage dependencies for Activity 6.
   5. Compiling and formatting comprehensive progress documentation.
-- **Validation:** Every SQL query, maintenance command, backup job, and verification statement was executed and validated directly on PostgreSQL 18.6 in pgAdmin 4. No codebase files in the target project repository were modified.
+- **Validation:** Every SQL query, maintenance command, backup job, and verification statement was executed and validated directly on PostgreSQL 18.6 in pgAdmin 4.
 
