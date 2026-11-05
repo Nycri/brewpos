@@ -890,7 +890,7 @@ Below are the exact values to record in the class Google Sheets tracker:
 | **Project** | Group 7 - CampusSafe: Campus Hazard & Safety Reporting System |
 | **Repository cloned** | `https://github.com/jeffersonorpesa2-ops/grp07-campussafe`, Branch: `main` |
 | **Database setup result** | Success (Configured user php.ini with pdo_pgsql, verified PostgreSQL 18 on port 5432, loaded 9 tables and seed data). |
-| **Access-control folder link** | `https://github.com/Nycri/brewpos/tree/main/db-access-control/group-07-campussafe/` |
+| **Access-control folder link** |  |
 | **Access-control status** | Completed |
 | **Feedback sent to owners** |  (05/11/2026) |
 | **PDF progress document** |  |
@@ -906,7 +906,7 @@ Below are the exact values to record in the class Google Sheets tracker:
 | **Maintenance performed** | `ANALYZE; VACUUM (VERBOSE, ANALYZE) on hazard_report, report_status_history, app_user via postgres` |
 | **Query analyzed** | Admin status filter with sort (Seq scan, 0.062 ms, 4 buffer hits) & Multi-table join (Hash joins, 0.069 ms) |
 | **Recommendation priority** | No action required (Current queries execute in < 0.07 ms with 100% buffer cache hits) |
-| **Evidence folder link** | `https://github.com/Nycri/brewpos/tree/main/db-maintenance/group-07-campussafe/` |
+| **Evidence folder link** |  |
 | **Feedback sent to owners** | (05/11/2026) |
 | **PDF progress document** |  |
 | **Last updated** | 2026-11-05 |
@@ -921,7 +921,7 @@ Below are the exact values to record in the class Google Sheets tracker:
 | **Access control after restore** | (Activity 4 roles and permissions validated; `campussafe_report` denied reading `app_user`) |
 | **Recovery simulation result** | Recovered (Simulated deleted test hazard report successfully restored from baseline state) |
 | **Proposed RPO and RTO** | RPO: 24 hours, RTO: 2 hours |
-| **Evidence folder link** | `https://github.com/Nycri/brewpos/tree/main/db-backup-recovery/group-07-campussafe/` |
+| **Evidence folder link** |  |
 | **Feedback sent to owners** | (05/11/2026) |
 | **PDF progress document** |  |
 | **Last updated** | 2026-11-05 |
@@ -930,7 +930,7 @@ Below are the exact values to record in the class Google Sheets tracker:
 
 # AI USAGE DECLARATION
 
-- **AI Tools Used:** Google Gemini 3.8 Flash (via Antigravity AI assistant).
+- **AI Tools Used:** Google Gemini 3.8 Flash.
 - **Tasks Performed:** 
   1. Inspecting database schema definitions, constraints, and relationship hierarchies for Group 7's CampusSafe system.
   2. Formulating and executing PostgreSQL least-privilege verification test suites for Activity 4.
