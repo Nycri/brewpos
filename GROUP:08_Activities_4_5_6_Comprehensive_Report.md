@@ -801,7 +801,7 @@ Below are the exact values to record in your group's copy of the class Google Sh
 | **Project** | Group 8 - bwisIT Solutions: Campus Canteen Pre-Order and Queue Management System |
 | **Repository cloned** | `https://github.com/EclipseChan/bwisIT-Solutions---Campus-Canteen-Pre-Order-and-Queue-Management-System`, Branch: `main` |
 | **Database setup result** | Success (Port 8080 collision with local PEMHTTPD identified; resolved by port remapping to 8081). All 7 tables and seed data verified. |
-| **Access-control folder link** | `https://github.com/Nycri/brewpos/tree/main/db-access-control/group-08-bwisit/` |
+| **Access-control folder link** |  |
 | **Access-control status** | Completed |
 | **Feedback sent to owners** | (04/11/2026) |
 | **PDF progress document** |  |
@@ -817,7 +817,7 @@ Below are the exact values to record in your group's copy of the class Google Sh
 | **Maintenance performed** | `ANALYZE; VACUUM (VERBOSE, ANALYZE) on customer_order, order_item, menu_item via canteen_admin` |
 | **Query analyzed** | Vendor incoming orders lookup with student and queue join (Seq Scan + Hash Join, < 0.15 ms) |
 | **Recommendation priority** | No action required (Follow-up index on `customer_order(vendor_id, order_date DESC)` when orders exceed 10,000) |
-| **Evidence folder link** | `https://github.com/Nycri/brewpos/tree/main/db-maintenance/group-08-bwisit/` |
+| **Evidence folder link** |  |
 | **Feedback sent to owners** | (04/11/2026) |
 | **PDF progress document** |  |
 | **Last updated** | 2026-11-04 |
@@ -832,9 +832,9 @@ Below are the exact values to record in your group's copy of the class Google Sh
 | **Access control after restore** | Yes (Activity 4 roles and permissions validated; `canteen_app` DELETE restrictions enforced) |
 | **Recovery simulation result** | Recovered (Simulated deleted test record successfully restored from verified backup state) |
 | **Proposed RPO and RTO** | RPO: 15 minutes, RTO: 30 minutes |
-| **Evidence folder link** | `https://github.com/Nycri/brewpos/tree/main/db-backup-recovery/group-08-bwisit/` |
-| **Feedback sent to owners** | Yes (04/11/2026) |
-| **PDF progress document** | *(Link to your group's shared PDF document)* |
+| **Evidence folder link** |  |
+| **Feedback sent to owners** |  (04/11/2026) |
+| **PDF progress document** |  |
 | **Last updated** | 2026-11-04 |
 
 ---
