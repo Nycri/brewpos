@@ -960,10 +960,10 @@ Below are the exact values to record in the class Google Sheets tracker:
 | **Project** | Group 5 - PUP-SPOT: Campus Lost and Found System |
 | **Repository cloned** | `https://github.com/grp05-dba/grp05_lostandfound`, Branch: `main` |
 | **Database setup result** | Success (Initialized PostgreSQL 18.6 on port 5432, loaded 8 tables, categories, demo records, and configured least-privilege roles). |
-| **Access-control folder link** | `https://github.com/Nycri/brewpos/tree/main/db-access-control/group-05-pupspot/` |
+| **Access-control folder link** |  |
 | **Access-control status** | Completed |
-| **Feedback sent to owners** | Yes (05/11/2026) |
-| **PDF progress document** | *(Link to your group's shared PDF document)* |
+| **Feedback sent to owners** |  (05/11/2026) |
+| **PDF progress document** |  |
 | **Last updated** | 2026-11-05 |
 
 ### Activity 5 Log Tab
@@ -976,9 +976,9 @@ Below are the exact values to record in the class Google Sheets tracker:
 | **Maintenance performed** | `ANALYZE; VACUUM (VERBOSE, ANALYZE) on items, lost_reports, item_images via postgres` |
 | **Query analyzed** | Public items search by category & status (Seq scan + Hash join, 0.089 ms) & Multi-table match review (Hash joins, 0.141 ms) |
 | **Recommendation priority** | No action required (Current queries execute in < 0.15 ms with 100% buffer cache hits) |
-| **Evidence folder link** | `https://github.com/Nycri/brewpos/tree/main/db-maintenance/group-05-pupspot/` |
-| **Feedback sent to owners** | Yes (05/11/2026) |
-| **PDF progress document** | *(Link to your group's shared PDF document)* |
+| **Evidence folder link** |  |
+| **Feedback sent to owners** | (05/11/2026) |
+| **PDF progress document** |  |
 | **Last updated** | 2026-11-05 |
 
 ### Activity 6 Log Tab
@@ -991,9 +991,9 @@ Below are the exact values to record in the class Google Sheets tracker:
 | **Access control after restore** | Yes (Activity 4 roles and permissions validated; `lostandfound_public` denied UPDATE on `items`) |
 | **Recovery simulation result** | Recovered (Simulated deleted test item successfully restored from verified baseline state) |
 | **Proposed RPO and RTO** | RPO: 1 hour, RTO: 30 minutes |
-| **Evidence folder link** | `https://github.com/Nycri/brewpos/tree/main/db-backup-recovery/group-05-pupspot/` |
-| **Feedback sent to owners** | Yes (05/11/2026) |
-| **PDF progress document** | *(Link to your group's shared PDF document)* |
+| **Evidence folder link** |  |
+| **Feedback sent to owners** |  (05/11/2026) |
+| **PDF progress document** | |
 | **Last updated** | 2026-11-05 |
 
 ---
