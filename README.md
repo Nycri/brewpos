@@ -30,6 +30,28 @@
 | **User Roles & Security** | [docs/user-roles.md](docs/user-roles.md) | Detailed mapping of application roles to PostgreSQL database roles and privileges. |
 | **SQL Scripts & DBA Guide** | [database/README.md](database/README.md) | Overview of all SQL scripts, database role setup, and backup/restore steps. |
 | **Testing Walkthrough** | [TESTING_GUIDE.md](TESTING_GUIDE.md) | Easy checklist for testing all features in the browser and running automated tests. |
+| **Activity 4: Access Control** | [access-control/](access-control/) | RBAC role definitions, least-privilege verification, and audit reports across peer groups (`G02`–`G11`). |
+| **Activity 5: Maintenance & Monitoring** | [activity-5/](activity-5/) | Health inspections, bloat audits, `VACUUM`/`ANALYZE`, and `EXPLAIN (ANALYZE, BUFFERS)` profiling. |
+| **Activity 5: Technical Evidence** | [activity-5/Evidence-act5/](activity-5/Evidence-act5/) | Concrete diagnostic queries, raw outputs, server logs, and execution plan metrics. |
+| **Activity 6: Backup & Recovery** | [activity-6/](activity-6/) | Compressed backups (`pg_dump -Fc`), SHA-256 hashes, test restorations, and disaster recovery drills. |
+| **Activity 6: Technical Evidence** | [activity-6/Evidence-act6/](activity-6/Evidence-act6/) | Checksum verification outputs, `pg_restore -l` archives, row parity proofs, and drill transcripts. |
+
+---
+
+### 2.1 COMP 018: Activities 4, 5, and 6 Database Administration Evaluation Repository
+
+As part of the **COMP 018: Database Administration** coursework, **Group 4 (BrewPOS)** performed comprehensive database administration audits on 8 peer group projects:
+
+| Group Code | Evaluated Peer Group | Project Monitored | Primary Database | Activity 4 (Access Control) | Activity 5 (Maintenance) | Activity 6 (Backup & Recovery) |
+|---|---|---|---|:---:|:---:|:---:|
+| **G02** | Group 02 | Park-It: Parking Management System | `grp_parkitdb` | [G02_Act-4.md](access-control/G02_Act-4.md) | [G02_Act-5.md](activity-5/G02_Act-5.md) ([Evidence](activity-5/Evidence-act5/G02_Act-5_Evidence.md)) | [G02_Act-6.md](activity-6/G02_Act-6.md) ([Evidence](activity-6/Evidence-act6/G02_Act-6_Evidence.md)) |
+| **G03** | Group 03 | OJT Management System | `ojt_management` | [G03_Act-4.md](access-control/G03_Act-4.md) | [G03_Act-5.md](activity-5/G03_Act-5.md) ([Evidence](activity-5/Evidence-act5/G03_Act-5_Evidence.md)) | [G03_Act-6.md](activity-6/G03_Act-6.md) ([Evidence](activity-6/Evidence-act6/G03_Act-6_Evidence.md)) |
+| **G05** | Group 05 | PUP-SPOT: Campus Lost and Found | `grp05_lostandfounddb` | [G05_Act-4.md](access-control/G05_Act-4.md) | [G05_Act-5.md](activity-5/G05_Act-5.md) ([Evidence](activity-5/Evidence-act5/G05_Act-5_Evidence.md)) | [G05_Act-6.md](activity-6/G05_Act-6.md) ([Evidence](activity-6/Evidence-act6/G05_Act-6_Evidence.md)) |
+| **G06** | Group 06 | HabalGo: Ride and Booking System | `grp00_habalgodb` | [G06_Act-4.md](access-control/G06_Act-4.md) | [G06_Act-5.md](activity-5/G06_Act-5.md) ([Evidence](activity-5/Evidence-act5/G06_Act-5_Evidence.md)) | [G06_Act-6.md](activity-6/G06_Act-6.md) ([Evidence](activity-6/Evidence-act6/G06_Act-6_Evidence.md)) |
+| **G07** | Group 07 | CampusSafe: Safety Reporting System | `grp07_campussafedb` | [G07_Act-4.md](access-control/G07_Act-4.md) | [G07_Act-5.md](activity-5/G07_Act-5.md) ([Evidence](activity-5/Evidence-act5/G07_Act-5_Evidence.md)) | [G07_Act-6.md](activity-6/G07_Act-6.md) ([Evidence](activity-6/Evidence-act6/G07_Act-6_Evidence.md)) |
+| **G08** | Group 08 | Campus Canteen Pre-Order & Queue | `canteen_db` | [G08_Act-4.md](access-control/G08_Act-4.md) | [G08_Act-5.md](activity-5/G08_Act-5.md) ([Evidence](activity-5/Evidence-act5/G08_Act-5_Evidence.md)) | [G08_Act-6.md](activity-6/G08_Act-6.md) ([Evidence](activity-6/Evidence-act6/G08_Act-6_Evidence.md)) |
+| **G10** | Group 10 | Restaurant Online Ordering & Reservation | `grp_binarysisters_projectdb` | [G10_Act-4.md](access-control/G10_Act-4.md) | [G10_Act-5.md](activity-5/G10_Act-5.md) ([Evidence](activity-5/Evidence-act5/G10_Act-5_Evidence.md)) | [G10_Act-6.md](activity-6/G10_Act-6.md) ([Evidence](activity-6/Evidence-act6/G10_Act-6_Evidence.md)) |
+| **G11** | Group 11 | BoardTrack: Boarding Rental System | `boardtrack_db` | [G11_Act-4.md](access-control/G11_Act-4.md) | [G11_Act-5.md](activity-5/G11_Act-5.md) ([Evidence](activity-5/Evidence-act5/G11_Act-5_Evidence.md)) | [G11_Act-6.md](activity-6/G11_Act-6.md) ([Evidence](activity-6/Evidence-act6/G11_Act-6_Evidence.md)) |
 
 ---
 
