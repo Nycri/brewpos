@@ -1,4 +1,4 @@
-﻿# Activity 5 Technical Evidence Dossier â€” Group 08: Campus Canteen Pre-Order and Queue Management System
+# Activity 5 Technical Evidence Dossier - Group 08: Campus Canteen Pre-Order and Queue Management System
 ## COMP 018: Database Maintenance & Monitoring Technical Evidence Audit
 
 ---

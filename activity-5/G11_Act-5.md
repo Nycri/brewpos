@@ -1,5 +1,5 @@
-﻿# COMP 018: Database Administration â€” Activity 5: Database Maintenance and Monitoring
-## Group Evaluation Report: Group 11 â€” BoardTrack: Boarding House & Rental Management System
+# COMP 018: Database Administration - Activity 5: Database Maintenance and Monitoring
+## Group Evaluation Report: Group 11 - BoardTrack: Boarding House & Rental Management System
 
 ---
 
@@ -432,7 +432,7 @@ ORDER BY l.start_date DESC;
 | **Maintenance performed** | `ANALYZE; VACUUM (VERBOSE, ANALYZE) on room, property, lease, payment via postgres` |
 | **Query analyzed** | Available rooms lookup with rate sort (Nested loop, 0.137 ms) & Multi-table lease billing summary (Hash joins, 0.281 ms) |
 | **Recommendation priority** | No action required (Current queries execute in < 0.29 ms with 100% buffer cache hits) |
-| **Evidence folder link** | `https://github.com/Nycri/brewpos/tree/main/db-maintenance/group-11-boardtrack/` |
+| **Evidence folder link** | `https://github.com/Nycri/brewpos/tree/main/activity-5/Evidence-act5` |
 | **Feedback sent to owners** | Yes (05/11/2026) |
 | **PDF progress document** | https://github.com/Nycri/brewpos/blob/main/PDF_PROGRESS_DOCUMENTATION.pdf |
 | **Last updated** | 2026-11-05 |

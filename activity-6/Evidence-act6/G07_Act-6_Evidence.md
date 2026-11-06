@@ -1,4 +1,4 @@
-﻿# Activity 6 Technical Evidence Dossier â€” Group 07: CampusSafe: Campus Hazard & Safety Reporting System
+# Activity 6 Technical Evidence Dossier - Group 07: CampusSafe: Campus Hazard & Safety Reporting System
 ## COMP 018: Database Backup, Restoration & Disaster Recovery Evidence Audit
 
 ---

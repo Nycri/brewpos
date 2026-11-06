@@ -1,4 +1,4 @@
-﻿# Activity 5 Technical Evidence Dossier â€” Group 02: Park-It: Parking Management System
+# Activity 5 Technical Evidence Dossier - Group 02: Park-It: Parking Management System
 ## COMP 018: Database Maintenance & Monitoring Technical Evidence Audit
 
 ---

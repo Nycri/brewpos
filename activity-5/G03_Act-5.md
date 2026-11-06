@@ -1,5 +1,5 @@
-﻿# COMP 018: Database Administration â€” Activity 5: Database Maintenance and Monitoring
-## Group Evaluation Report: Group 03 â€” OJT Management System
+# COMP 018: Database Administration - Activity 5: Database Maintenance and Monitoring
+## Group Evaluation Report: Group 03 - OJT Management System
 
 ---
 
@@ -414,7 +414,7 @@ ORDER BY sr.student_req_id ASC;
 | **Maintenance performed** | `ANALYZE; VACUUM (VERBOSE, ANALYZE) on ojt_applications, attendance, evaluations via postgres` |
 | **Query analyzed** | Student placement progress & verified hours (Nested Loop, 0.140 ms, 7 buffer hits) & Requirements compliance review (Hash Joins, 0.126 ms) |
 | **Recommendation priority** | No action required (Current queries execute in < 0.15 ms with 100% buffer cache hits) |
-| **Evidence folder link** |  |
+| **Evidence folder link** | `https://github.com/Nycri/brewpos/tree/main/activity-5/Evidence-act5` |
 | **Feedback sent to owners** | (05/11/2026) |
 | **PDF progress document** | |
 | **Last updated** | 2026-11-05 |

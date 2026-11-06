@@ -1,5 +1,5 @@
-﻿# COMP 018: Database Administration â€” Activity 4: Access Control Report
-## Group Evaluation Report: Group 07 â€” CampusSafe: Campus Hazard & Safety Reporting System
+# COMP 018: Database Administration - Activity 4: Access Control Report
+## Group Evaluation Report: Group 07 - CampusSafe: Campus Hazard & Safety Reporting System
 
 ---
 
@@ -324,7 +324,7 @@ ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT ON SEQUENCES TO app_backu
 | **Project** | Group 7 - CampusSafe: Campus Hazard & Safety Reporting System |
 | **Repository cloned** | `https://github.com/jeffersonorpesa2-ops/grp07-campussafe`, Branch: `main` |
 | **Database setup result** | Success (Configured user php.ini with pdo_pgsql, verified PostgreSQL 18 on port 5432, loaded 9 tables and seed data). |
-| **Access-control folder link** | `https://github.com/Nycri/brewpos/tree/main/db-access-control/group-07-campussafe/` |
+| **Access-control folder link** | `https://github.com/Nycri/brewpos/tree/main/access-control` |
 | **Access-control status** | Completed |
 | **Feedback sent to owners** |  (05/11/2026) |
 | **PDF progress document** |  |

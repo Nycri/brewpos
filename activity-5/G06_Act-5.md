@@ -1,5 +1,5 @@
-﻿# COMP 018: Database Administration â€” Activity 5: Database Maintenance and Monitoring
-## Group Evaluation Report: Group 06 â€” HabalGo: Ride and Booking Management System
+# COMP 018: Database Administration - Activity 5: Database Maintenance and Monitoring
+## Group Evaluation Report: Group 06 - HabalGo: Ride and Booking Management System
 
 ---
 
@@ -429,7 +429,7 @@ SELECT
 | **Maintenance performed** | `ANALYZE; VACUUM (VERBOSE, ANALYZE) on driver, vehicle, driver_vehicle, booking via postgres` |
 | **Query analyzed** | Multi-table booking join query (Hash joins, 0.963 ms, 8 buffer hits) & Dashboard aggregate query (0.426 ms) |
 | **Recommendation priority** | No action required (Current queries execute in < 1 ms with 100% buffer cache hits) |
-| **Evidence folder link** |  |
+| **Evidence folder link** | `https://github.com/Nycri/brewpos/tree/main/activity-5/Evidence-act5` |
 | **Feedback sent to owners** |  (05/11/2026) |
 | **PDF progress document** |  |
 | **Last updated** | 2026-11-05 |

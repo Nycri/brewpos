@@ -1,5 +1,5 @@
-﻿# COMP 018: Database Administration â€” Activity 6: Database Backup, Restoration, and Recovery
-## Group Evaluation Report: Group 05 â€” PUP-SPOT: Campus Lost and Found System
+# COMP 018: Database Administration - Activity 6: Database Backup, Restoration, and Recovery
+## Group Evaluation Report: Group 05 - PUP-SPOT: Campus Lost and Found System
 
 ---
 
@@ -280,7 +280,7 @@ DELETE FROM items WHERE item_id = 999;
 | **Access control after restore** | Yes (Activity 4 roles and permissions validated; `lostandfound_public` denied UPDATE on `items`) |
 | **Recovery simulation result** | Recovered (Simulated deleted test item successfully restored from verified baseline state) |
 | **Proposed RPO and RTO** | RPO: 1 hour, RTO: 30 minutes |
-| **Evidence folder link** | `https://github.com/Nycri/brewpos/tree/main/db-backup-recovery/group-05-pupspot/` |
+| **Evidence folder link** | `https://github.com/Nycri/brewpos/tree/main/activity-6/Evidence-act6` |
 | **Feedback sent to owners** | Yes (05/11/2026) |
 | **PDF progress document** | *(Link to your group's shared PDF document)* |
 | **Last updated** | 2026-11-05 |

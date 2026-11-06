@@ -1,5 +1,5 @@
-﻿# COMP 018: Database Administration â€” Activity 5: Database Maintenance and Monitoring
-## Group Evaluation Report: Group 08 â€” Campus Canteen Pre-Order and Queue Management System
+# COMP 018: Database Administration - Activity 5: Database Maintenance and Monitoring
+## Group Evaluation Report: Group 08 - Campus Canteen Pre-Order and Queue Management System
 
 ---
 
@@ -318,7 +318,7 @@ Execution Time: 0.147 ms
 | **Maintenance performed** | `ANALYZE; VACUUM (VERBOSE, ANALYZE) on customer_order, order_item, menu_item via canteen_admin` |
 | **Query analyzed** | Vendor incoming orders lookup with student and queue join (Seq Scan + Hash Join, < 0.15 ms) |
 | **Recommendation priority** | No action required (Follow-up index on `customer_order(vendor_id, order_date DESC)` when orders exceed 10,000) |
-| **Evidence folder link** | `https://github.com/Nycri/brewpos/tree/main/db-maintenance/group-08-bwisit/` |
+| **Evidence folder link** | `https://github.com/Nycri/brewpos/tree/main/activity-5/Evidence-act5` |
 | **Feedback sent to owners** | Yes (04/11/2026) |
 | **PDF progress document** | *(Link to your group's shared PDF document)* |
 | **Last updated** | 2026-11-04 |

@@ -1,5 +1,5 @@
-﻿# COMP 018: Database Administration â€” Activity 6: Database Backup, Restoration, and Recovery
-## Group Evaluation Report: Group 10 â€” Restaurant Online Ordering & Table Reservation System
+# COMP 018: Database Administration - Activity 6: Database Backup, Restoration, and Recovery
+## Group Evaluation Report: Group 10 - Restaurant Online Ordering & Table Reservation System
 
 ---
 
@@ -294,7 +294,7 @@ DELETE FROM menu_item WHERE menu_item_id = 999;
 | **Access control after restore** | Yes (Activity 4 roles and permissions validated; `rors_report` denied reading `customer`) |
 | **Recovery simulation result** | Recovered (Simulated deleted test menu dish successfully restored from verified baseline state) |
 | **Proposed RPO and RTO** | RPO: 15 minutes, RTO: 30 minutes |
-| **Evidence folder link** |  |
+| **Evidence folder link** | `https://github.com/Nycri/brewpos/tree/main/activity-6/Evidence-act6` |
 | **Feedback sent to owners** |  (05/11/2026) |
 | **PDF progress document** | |
 | **Last updated** | 2026-11-05 |

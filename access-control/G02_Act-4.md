@@ -1,5 +1,5 @@
-﻿# COMP 018: Database Administration â€” Activity 4: Access Control Report
-## Group Evaluation Report: Group 02 â€” Park-It: Parking Management System
+# COMP 018: Database Administration - Activity 4: Access Control Report
+## Group Evaluation Report: Group 02 - Park-It: Parking Management System
 
 ---
 
@@ -329,7 +329,7 @@ ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT ON SEQUENCES TO parkit_ba
 | **Project** | Group 2 - Park-It: Parking Management System |
 | **Repository cloned** | `https://github.com/millerdevera6-glitch/park-it-database`, Branch: `main` |
 | **Database setup result** | Success (Verified PostgreSQL 18.6 on port 5432, schema built with 5 tables, populated sample data, configured least-privilege roles). |
-| **Access-control folder link** | `https://github.com/Nycri/brewpos/tree/main/db-access-control/group-02-parkit/` |
+| **Access-control folder link** | `https://github.com/Nycri/brewpos/tree/main/access-control` |
 | **Access-control status** | Completed |
 | **Feedback sent to owners** | Yes (05/11/2026) |
 | **PDF progress document** | *(Link to your group's shared PDF document)* |

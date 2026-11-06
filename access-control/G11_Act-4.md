@@ -1,5 +1,5 @@
-﻿# COMP 018: Database Administration â€” Activity 4: Access Control Report
-## Group Evaluation Report: Group 11 â€” BoardTrack: Boarding House & Rental Management System
+# COMP 018: Database Administration - Activity 4: Access Control Report
+## Group Evaluation Report: Group 11 - BoardTrack: Boarding House & Rental Management System
 
 ---
 
@@ -327,7 +327,7 @@ ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT ON SEQUENCES TO boardtrac
 | **Project** | Group 11 - BoardTrack: Boarding House & Rental Management System |
 | **Repository cloned** | `https://github.com/karlrobertc-art/BoardTrack`, Branch: `main` |
 | **Database setup result** | Success (Initialized PostgreSQL 18.6 on port 5432, built 8 tables, exclusion constraint, triggers, view, sample data, and configured least-privilege roles). |
-| **Access-control folder link** | `https://github.com/Nycri/brewpos/tree/main/db-access-control/group-11-boardtrack/` |
+| **Access-control folder link** | `https://github.com/Nycri/brewpos/tree/main/access-control` |
 | **Access-control status** | Completed |
 | **Feedback sent to owners** | Yes (05/11/2026) |
 | **PDF progress document** | https://github.com/Nycri/brewpos/blob/main/PDF_PROGRESS_DOCUMENTATION.pdf |

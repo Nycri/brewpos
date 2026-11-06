@@ -1,4 +1,4 @@
-﻿# Activity 6 Technical Evidence Dossier â€” Group 02: Park-It: Parking Management System
+# Activity 6 Technical Evidence Dossier - Group 02: Park-It: Parking Management System
 ## COMP 018: Database Backup, Restoration & Disaster Recovery Evidence Audit
 
 ---

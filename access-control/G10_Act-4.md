@@ -1,5 +1,5 @@
-﻿# COMP 018: Database Administration â€” Activity 4: Access Control Report
-## Group Evaluation Report: Group 10 â€” Restaurant Online Ordering & Table Reservation System
+# COMP 018: Database Administration - Activity 4: Access Control Report
+## Group Evaluation Report: Group 10 - Restaurant Online Ordering & Table Reservation System
 
 ---
 
@@ -393,7 +393,7 @@ ALTER DEFAULT PRIVILEGES FOR ROLE postgres IN SCHEMA public GRANT ALL ON SEQUENC
 | **Project** | Group 10 - Restaurant Online Ordering & Table Reservation System (Binary Sisters) |
 | **Repository cloned** | `https://github.com/kathlenmaecallos11-arch/Restaurant-Online-Ordering-Table-Reservation-System`, Branch: `main` |
 | **Database setup result** | Success (Verified PostgreSQL 18.6 on port 5432, schema built with 8 tables, 4 views, triggers, constraints, populated sample data, configured least-privilege roles). |
-| **Access-control folder link** |  |
+| **Access-control folder link** | `https://github.com/Nycri/brewpos/tree/main/access-control` |
 | **Access-control status** | Completed |
 | **Feedback sent to owners** |  (05/11/2026) |
 | **PDF progress document** | |

@@ -1,4 +1,4 @@
-﻿# Activity 6 Technical Evidence Dossier â€” Group 06: HabalGo: Ride and Booking Management System
+# Activity 6 Technical Evidence Dossier - Group 06: HabalGo: Ride and Booking Management System
 ## COMP 018: Database Backup, Restoration & Disaster Recovery Evidence Audit
 
 ---

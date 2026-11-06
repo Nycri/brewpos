@@ -1,5 +1,5 @@
-﻿# COMP 018: Database Administration â€” Activity 4: Access Control Report
-## Group Evaluation Report: Group 03 â€” OJT Management System
+# COMP 018: Database Administration - Activity 4: Access Control Report
+## Group Evaluation Report: Group 03 - OJT Management System
 
 ---
 
@@ -405,7 +405,7 @@ ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT ON SEQUENCES TO ojt_backu
 | **Project** | Group 3 - OJT Management System (Project-OJT-RMA-System) [Tracker Key: Group 06 / Group 03] |
 | **Repository cloned** | `https://github.com/swvenz/Project-OJT-RMA-System`, Branches: `main`, `ojt-system-untested.demo` |
 | **Database setup result** | Success with issues (Resolved repository artifact mismatch where `OJT Database.sql` on `main` was an unrelated demo lending dump; extracted official schema from `ojt-system-untested.demo`, repaired supervisor column discrepancies, and deployed full 12-table relational schema with RBAC). |
-| **Access-control folder link** | |
+| **Access-control folder link** | `https://github.com/Nycri/brewpos/tree/main/access-control` |
 | **Access-control status** | Completed |
 | **Feedback sent to owners** | (05/11/2026) |
 | **PDF progress document** | |

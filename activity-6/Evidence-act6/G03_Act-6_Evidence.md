@@ -1,4 +1,4 @@
-﻿# Activity 6 Technical Evidence Dossier â€” Group 03: OJT Management System
+# Activity 6 Technical Evidence Dossier - Group 03: OJT Management System
 ## COMP 018: Database Backup, Restoration & Disaster Recovery Evidence Audit
 
 ---

@@ -1,5 +1,5 @@
-﻿# COMP 018: Database Administration â€” Activity 5: Database Maintenance and Monitoring
-## Group Evaluation Report: Group 10 â€” Restaurant Online Ordering & Table Reservation System
+# COMP 018: Database Administration - Activity 5: Database Maintenance and Monitoring
+## Group Evaluation Report: Group 10 - Restaurant Online Ordering & Table Reservation System
 
 ---
 
@@ -397,7 +397,7 @@ ORDER BY o.order_date DESC;
 | **Maintenance performed** | `ANALYZE; VACUUM (VERBOSE, ANALYZE) on customer, staff, menu_item via rors_maint (pg_maintain)` |
 | **Query analyzed** | Menu item browsing by category & availability (Seq scan, 0.614 ms, 4 buffer hits) & Multi-table active order join (Hash joins, 0.285 ms) |
 | **Recommendation priority** | No action required (Current queries execute in < 0.62 ms with 100% buffer cache hits) |
-| **Evidence folder link** |  |
+| **Evidence folder link** | `https://github.com/Nycri/brewpos/tree/main/activity-5/Evidence-act5` |
 | **Feedback sent to owners** | Ys (05/11/2026) |
 | **PDF progress document** | |
 | **Last updated** | 2026-11-05 |

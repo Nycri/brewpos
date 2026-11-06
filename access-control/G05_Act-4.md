@@ -1,5 +1,5 @@
-﻿# COMP 018: Database Administration â€” Activity 4: Access Control Report
-## Group Evaluation Report: Group 05 â€” PUP-SPOT: Campus Lost and Found System
+# COMP 018: Database Administration - Activity 4: Access Control Report
+## Group Evaluation Report: Group 05 - PUP-SPOT: Campus Lost and Found System
 
 ---
 
@@ -348,7 +348,7 @@ ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT ON SEQUENCES TO lostandfo
 | **Project** | Group 5 - PUP-SPOT: Campus Lost and Found System |
 | **Repository cloned** | `https://github.com/grp05-dba/grp05_lostandfound`, Branch: `main` |
 | **Database setup result** | Success (Initialized PostgreSQL 18.6 on port 5432, loaded 8 tables, categories, demo records, and configured least-privilege roles). |
-| **Access-control folder link** | `https://github.com/Nycri/brewpos/tree/main/db-access-control/group-05-pupspot/` |
+| **Access-control folder link** | `https://github.com/Nycri/brewpos/tree/main/access-control` |
 | **Access-control status** | Completed |
 | **Feedback sent to owners** | Yes (05/11/2026) |
 | **PDF progress document** | *(Link to your group's shared PDF document)* |

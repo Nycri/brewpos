@@ -1,4 +1,4 @@
-﻿# Activity 6 Technical Evidence Dossier â€” Group 05: PUP-SPOT: Campus Lost and Found System
+# Activity 6 Technical Evidence Dossier - Group 05: PUP-SPOT: Campus Lost and Found System
 ## COMP 018: Database Backup, Restoration & Disaster Recovery Evidence Audit
 
 ---

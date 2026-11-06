@@ -1,5 +1,5 @@
-﻿# COMP 018: Database Administration â€” Activity 5: Database Maintenance and Monitoring
-## Group Evaluation Report: Group 02 â€” Park-It: Parking Management System
+# COMP 018: Database Administration - Activity 5: Database Maintenance and Monitoring
+## Group Evaluation Report: Group 02 - Park-It: Parking Management System
 
 ---
 
@@ -372,7 +372,7 @@ ORDER BY t.entry_time DESC;
 | **Maintenance performed** | `ANALYZE; VACUUM (VERBOSE, ANALYZE) on parking_zone, transaction, payment via postgres` |
 | **Query analyzed** | Parking zone occupancy lookup (Seq scan, 0.050 ms, 4 buffer hits) & Multi-table vehicle stay join (Hash joins, 0.378 ms) |
 | **Recommendation priority** | No action required (Current queries execute in < 0.38 ms with 100% buffer cache hits) |
-| **Evidence folder link** | `https://github.com/Nycri/brewpos/tree/main/db-maintenance/group-02-parkit/` |
+| **Evidence folder link** | `https://github.com/Nycri/brewpos/tree/main/activity-5/Evidence-act5` |
 | **Feedback sent to owners** | Yes (05/11/2026) |
 | **PDF progress document** | *(Link to your group's shared PDF document)* |
 | **Last updated** | 2026-11-05 |

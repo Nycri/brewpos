@@ -1,5 +1,5 @@
-﻿# COMP 018: Database Administration â€” Activity 4: Access Control Report
-## Group Evaluation Report: Group 08 â€” Campus Canteen Pre-Order and Queue Management System
+# COMP 018: Database Administration - Activity 4: Access Control Report
+## Group Evaluation Report: Group 08 - Campus Canteen Pre-Order and Queue Management System
 
 ---
 
@@ -270,7 +270,7 @@ GRANT SELECT ON ALL TABLES IN SCHEMA public TO canteen_readonly_grp;
 | **Project** | Group 8 - bwisIT Solutions: Campus Canteen Pre-Order and Queue Management System |
 | **Repository cloned** | `https://github.com/EclipseChan/bwisIT-Solutions---Campus-Canteen-Pre-Order-and-Queue-Management-System`, Branch: `main` |
 | **Database setup result** | Success (Port 8080 collision with local PEMHTTPD identified; resolved by port remapping to 8081). All 7 tables and seed data verified. |
-| **Access-control folder link** | `https://github.com/Nycri/brewpos/tree/main/db-access-control/group-08-bwisit/` |
+| **Access-control folder link** | `https://github.com/Nycri/brewpos/tree/main/access-control` |
 | **Access-control status** | Completed |
 | **Feedback sent to owners** | Yes (04/11/2026) |
 | **PDF progress document** | *(Link to your group's shared PDF document)* |

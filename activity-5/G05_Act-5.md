@@ -1,5 +1,5 @@
-﻿# COMP 018: Database Administration â€” Activity 5: Database Maintenance and Monitoring
-## Group Evaluation Report: Group 05 â€” PUP-SPOT: Campus Lost and Found System
+# COMP 018: Database Administration - Activity 5: Database Maintenance and Monitoring
+## Group Evaluation Report: Group 05 - PUP-SPOT: Campus Lost and Found System
 
 ---
 
@@ -368,7 +368,7 @@ ORDER BY pm.similarity_score DESC;
 | **Maintenance performed** | `ANALYZE; VACUUM (VERBOSE, ANALYZE) on items, lost_reports, item_images via postgres` |
 | **Query analyzed** | Public items search by category & status (Seq scan + Hash join, 0.089 ms) & Multi-table match review (Hash joins, 0.141 ms) |
 | **Recommendation priority** | No action required (Current queries execute in < 0.15 ms with 100% buffer cache hits) |
-| **Evidence folder link** | `https://github.com/Nycri/brewpos/tree/main/db-maintenance/group-05-pupspot/` |
+| **Evidence folder link** | `https://github.com/Nycri/brewpos/tree/main/activity-5/Evidence-act5` |
 | **Feedback sent to owners** | Yes (05/11/2026) |
 | **PDF progress document** | *(Link to your group's shared PDF document)* |
 | **Last updated** | 2026-11-05 |

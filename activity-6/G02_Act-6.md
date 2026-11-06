@@ -1,5 +1,5 @@
-﻿# COMP 018: Database Administration â€” Activity 6: Database Backup, Restoration, and Recovery
-## Group Evaluation Report: Group 02 â€” Park-It: Parking Management System
+# COMP 018: Database Administration - Activity 6: Database Backup, Restoration, and Recovery
+## Group Evaluation Report: Group 02 - Park-It: Parking Management System
 
 ---
 
@@ -254,7 +254,7 @@ DELETE FROM parking_zone WHERE zone_id = 999;
 | **Access control after restore** | Yes (Activity 4 roles and permissions validated; `parkit_report_user` denied reading `staff_user`) |
 | **Recovery simulation result** | Recovered (Simulated deleted test parking zone successfully restored from baseline state) |
 | **Proposed RPO and RTO** | RPO: 30 minutes, RTO: 1 hour |
-| **Evidence folder link** | `https://github.com/Nycri/brewpos/tree/main/db-backup-recovery/group-02-parkit/` |
+| **Evidence folder link** | `https://github.com/Nycri/brewpos/tree/main/activity-6/Evidence-act6` |
 | **Feedback sent to owners** | Yes (05/11/2026) |
 | **PDF progress document** | *(Link to your group's shared PDF document)* |
 | **Last updated** | 2026-11-05 |

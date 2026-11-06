@@ -1,5 +1,5 @@
-﻿# COMP 018: Database Administration â€” Activity 6: Database Backup, Restoration, and Recovery
-## Group Evaluation Report: Group 07 â€” CampusSafe: Campus Hazard & Safety Reporting System
+# COMP 018: Database Administration - Activity 6: Database Backup, Restoration, and Recovery
+## Group Evaluation Report: Group 07 - CampusSafe: Campus Hazard & Safety Reporting System
 
 ---
 
@@ -252,7 +252,7 @@ DELETE FROM hazard_report WHERE report_id = 999;
 | **Access control after restore** | (Activity 4 roles and permissions validated; `campussafe_report` denied reading `app_user`) |
 | **Recovery simulation result** | Recovered (Simulated deleted test hazard report successfully restored from baseline state) |
 | **Proposed RPO and RTO** | RPO: 24 hours, RTO: 2 hours |
-| **Evidence folder link** | `https://github.com/Nycri/brewpos/tree/main/db-backup-recovery/group-07-campussafe/` |
+| **Evidence folder link** | `https://github.com/Nycri/brewpos/tree/main/activity-6/Evidence-act6` |
 | **Feedback sent to owners** | (05/11/2026) |
 | **PDF progress document** |  |
 | **Last updated** | 2026-11-05 |

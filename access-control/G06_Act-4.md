@@ -1,5 +1,5 @@
-﻿# COMP 018: Database Administration â€” Activity 4: Access Control Report
-## Group Evaluation Report: Group 06 â€” HabalGo: Ride and Booking Management System
+# COMP 018: Database Administration - Activity 4: Access Control Report
+## Group Evaluation Report: Group 06 - HabalGo: Ride and Booking Management System
 
 ---
 
@@ -420,7 +420,7 @@ ORDER BY r.rolname;
 | **Project** | Group 6 - HabalGo: Ride and Booking Management System |
 | **Repository cloned** | `https://github.com/jeanaroyo/HabalGo`, Branch: `main` |
 | **Database setup result** | Success (Initialized database grp00_habalgodb, created schema habalgo, loaded 8 tables, sequences, and operational seed data). |
-| **Access-control folder link** | |
+| **Access-control folder link** | `https://github.com/Nycri/brewpos/tree/main/access-control` |
 | **Access-control status** | Completed |
 | **Feedback sent to owners** |  (05/11/2026) |
 | **PDF progress document** |  |

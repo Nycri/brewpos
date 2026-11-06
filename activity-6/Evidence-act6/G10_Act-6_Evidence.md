@@ -1,4 +1,4 @@
-﻿# Activity 6 Technical Evidence Dossier â€” Group 10: Restaurant Online Ordering & Table Reservation System
+# Activity 6 Technical Evidence Dossier - Group 10: Restaurant Online Ordering & Table Reservation System
 ## COMP 018: Database Backup, Restoration & Disaster Recovery Evidence Audit
 
 ---

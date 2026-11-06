@@ -1,4 +1,4 @@
-﻿# Activity 6 Technical Evidence Dossier â€” Group 11: BoardTrack: Boarding House & Rental Management System
+# Activity 6 Technical Evidence Dossier - Group 11: BoardTrack: Boarding House & Rental Management System
 ## COMP 018: Database Backup, Restoration & Disaster Recovery Evidence Audit
 
 ---

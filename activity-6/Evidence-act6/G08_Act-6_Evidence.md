@@ -1,4 +1,4 @@
-﻿# Activity 6 Technical Evidence Dossier â€” Group 08: Campus Canteen Pre-Order and Queue Management System
+# Activity 6 Technical Evidence Dossier - Group 08: Campus Canteen Pre-Order and Queue Management System
 ## COMP 018: Database Backup, Restoration & Disaster Recovery Evidence Audit
 
 ---

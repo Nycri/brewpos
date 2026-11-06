@@ -1,5 +1,5 @@
-﻿# COMP 018: Database Administration â€” Activity 6: Database Backup, Restoration, and Recovery
-## Group Evaluation Report: Group 06 â€” HabalGo: Ride and Booking Management System
+# COMP 018: Database Administration - Activity 6: Database Backup, Restoration, and Recovery
+## Group Evaluation Report: Group 06 - HabalGo: Ride and Booking Management System
 
 ---
 
@@ -299,7 +299,7 @@ If data loss occurs after the daily backup has completed, standard logical resto
 | **Access control after restore** | (Activity 4 roles and permissions validated; `habalgo_readonly_user` denied inserting) |
 | **Recovery simulation result** | Recovered (Simulated deleted test booking successfully restored from baseline state) |
 | **Proposed RPO and RTO** | RPO: 24 hours, RTO: 2 hours |
-| **Evidence folder link** |  |
+| **Evidence folder link** | `https://github.com/Nycri/brewpos/tree/main/activity-6/Evidence-act6` |
 | **Feedback sent to owners** |  (05/11/2026) |
 | **PDF progress document** |  |
 | **Last updated** | 2026-11-05 |
