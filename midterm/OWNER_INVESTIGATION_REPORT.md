@@ -36,8 +36,7 @@
    - [Incident 5: G01-INC5 — Dedicated Payment Transaction Table Architecture](#incident-5-g01-inc5--dedicated-payment-transaction-table-architecture)
 5. [Consolidated Verification Suite & Security Matrix](#5-consolidated-verification-suite--security-matrix)
 6. [Prevention, Practical Recommendations & Escalation Review](#6-prevention-practical-recommendations--escalation-review)
-7. [Designer Review & Feedback Exchange](#7-designer-review--feedback-exchange)
-8. [AI Usage Declaration & Validation Methodology](#8-ai-usage-declaration--validation-methodology)
+7. [AI Usage Declaration & Validation Methodology](#8-ai-usage-declaration--validation-methodology)
 
 ---
 
@@ -674,16 +673,9 @@ In accordance with assessment requirements, Group 4 establishes the following to
 
 ---
 
-# 7. Designer Review & Feedback Exchange
-
-### 7.1 Review of Designer Group Scenarios
-The owner group evaluated the 5 incident scenarios designed by Group 10:
-- **Fairness & Solvability:** All 5 scenarios were directly traceable to genuine flaws in our codebase. None required destructive superuser interventions.
-- **Difficulty & Realism:** The balance of 2 Easy, 2 Medium, and 1 Hard accurately reflected realistic DBA challenges, ranging from quick documentation alignments to multi-table data migration drills.
-- **Constructive Designer Feedback:** Group 10's observation regarding Flaw 4 (`JOIN public.menu_item m ON m.item_name = v.item_name`) was particularly insightful, uncovering an edge case in our seeder that would have caused silent Cartesian data corruption upon introducing duplicate product names across categories.
 
 
-# 8. AI Usage Declaration & Validation Methodology
+# 7. AI Usage Declaration & Validation Methodology
 
 - **Tools Utilized:** Gemini 3.8 Flash.
 - **Scope of Generation:** AI was used to draft structural templates for the incident investigation report, format markdown comparison tables, and suggest initial query structures for historical payment migration.
