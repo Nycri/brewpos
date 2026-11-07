@@ -3,25 +3,37 @@
 
 **Project Name:** BrewPOS — Café Point-of-Sale System  
 **Owner Group:** Group 4  
-**Assigned Designer Group:** Group 10  
+**Assigned Designer Group:** Group 10 
 **Database Platform:** PostgreSQL 18.6 (x86_64-pc-windows-msvc)  
 **Primary Production Database:** `grp_brewposdb`  
 **Disposable Sandbox Database:** `grp_brewposdb_restore_test`  
 **Repository:** [https://github.com/Nycri/brewpos](https://github.com/Nycri/brewpos)  
 **Date of Investigation:** November 7, 2026  
 
+---
 
+## Group Identification & Contribution Roster
+
+| Member Name | Student Role | Investigation Primary Responsibilities |
+|---|---|---|
+| **Olivarez, Charles Kean E.** | Lead DBA / System Architect | Midterm coordination, disposable database sandbox initialization, G01-INC1 (RBAC hardening) troubleshooting, lead defense presenter. |
+| **Infantado, Gerwin G.** | Security & Access Control DBA | Baseline comparison against Activities 3–6, G01-INC3 (DDL and Documentation synchronization) remediation, privilege matrix audit. |
+| **Pocsidio, Jhon Louie F.** | Schema & Data Migration DBA | G01-INC2 (Order status lifecycle design) and G01-INC5 (Dedicated payment transaction architecture & data migration script). |
+| **Abangan, SJ Kaizen M.** | Performance & Maintenance DBA | G01-INC4 (Seeder query Cartesian join debugging and category-scoped joins), query execution plan analysis, index maintenance. |
+| **Bartolata, Redge Raindel N.** | Quality Assurance & Disaster Recovery DBA | Automated verification test suite authoring, negative testing validation, Activity 6 backup parity checks, AI declaration validation. |
+
+---
 
 # Table of Contents
 1. [Executive Summary & System Links](#1-executive-summary--system-links)
 2. [Flaw Register & Designer Release Intake](#2-flaw-register--designer-release-intake)
 3. [Incident Register & Public Specifications](#3-incident-register--public-specifications)
 4. [Detailed Incident Investigations (Parts C & D)](#4-detailed-incident-investigations-parts-c--d)
-   - [Incident 1: G01-INC1 — Incomplete Role-Based Access Control](#incident-1-g01-inc1--incomplete-role-based-access-control)
-   - [Incident 2: G01-INC2 — No Explicit Order Status Management](#incident-2-g01-inc2--no-explicit-order-status-management)
-   - [Incident 3: G01-INC3 — Database Documentation Does Not Match SQL Implementation](#incident-3-g01-inc3--database-documentation-does-not-match-sql-implementation)
-   - [Incident 4: G01-INC4 — Incorrect Product Lookup in Database Seeder](#incident-4-g01-inc4--incorrect-product-lookup-in-database-seeder)
-   - [Incident 5: G01-INC5 — No Dedicated Payment Transaction Records](#incident-5-g01-inc5--no-dedicated-payment-transaction-records)
+   - [Incident 1: G01-INC1 — Role-Based Access Control Implementation](#incident-1-g01-inc1--role-based-access-control-implementation)
+   - [Incident 2: G01-INC2 — Order Status Lifecycle Tracking](#incident-2-g01-inc2--order-status-lifecycle-tracking)
+   - [Incident 3: G01-INC3 — Database Documentation vs. SQL Role Alignment](#incident-3-g01-inc3--database-documentation-vs-sql-role-alignment)
+   - [Incident 4: G01-INC4 — Ambiguous Product Lookup in Database Seeder](#incident-4-g01-inc4--ambiguous-product-lookup-in-database-seeder)
+   - [Incident 5: G01-INC5 — Dedicated Payment Transaction Table Architecture](#incident-5-g01-inc5--dedicated-payment-transaction-table-architecture)
 5. [Consolidated Verification Suite & Security Matrix](#5-consolidated-verification-suite--security-matrix)
 6. [Prevention, Practical Recommendations & Escalation Review](#6-prevention-practical-recommendations--escalation-review)
 7. [Designer Review & Feedback Exchange](#7-designer-review--feedback-exchange)
@@ -53,9 +65,9 @@ Adhering strictly to professional Database Administration standards and the asse
 
 # 2. Flaw Register & Designer Release Intake
 
-The table below documents the official release received from **Group 10 (Designer Group)**, capturing the exact flaws identified and the symptoms-only incident briefs issued to our team:
+The table below documents the official release received from **Group 10 (Designer Group)**, capturing the exact flaws identified, the symptoms-only incident briefs issued to our team, and our concise 2-sentence findings and responses:
 
-| Incident ID | Flaw Found (Designer Group Description) | Incident Brief (Symptoms Only) | Area & Activity | Severity | Owner Status |
+| Incident ID | Flaw Found (Designer Group) | Incident Brief (Symptoms Only) | Area & Activity | Severity | Owner Status |
 |---|---|---|---|:---:|:---:|
 | **G01-INC1** | The system does not properly implement role-based access control for the different user roles described in its documentation. | A user reported that certain functions were accessible even when they should have been restricted to a different user role. | Privileges & Access Control (Activity 4) | **High** | **Fixed** |
 | **G01-INC2** | The order management system does not have an explicit mechanism for tracking order statuses throughout the transaction process. | Staff members were unable to determine whether an order was still being processed, already completed, or cancelled. | Schema Objects & Lifecycle (Activity 3) | **Medium** | **Fixed** |
@@ -83,7 +95,11 @@ In accordance with the Midterm Assessment guidelines, Group 10 designed five inc
 
 ---
 
-## Incident 1: G01-INC1 — Incomplete Role-Based Access Control
+## Incident 1: G01-INC1 — Role-Based Access Control Implementation
+
+> **Owner's Finding:** An inspection of database privileges confirmed that the single runtime account `brewpos_app` possessed direct update and delete permissions on menu categories and items. Although the frontend interface concealed administrative buttons from cashiers, the database engine lacked operational role separation to prevent cashier sessions from altering catalog pricing.  
+>  
+> **Owner's Response to Said Flaw:** We acknowledged the flaw and resolved it by creating dedicated group roles that strictly restrict cashier accounts to menu reads and order insertions while revoking all catalog modification rights. We verified the fix on our disposable database by attempting an unauthorized price update under the cashier role, which the database engine blocked with a permission denied error.
 
 ### 1. Incident Metadata & Classification
 - **Incident ID:** `G01-INC1`
@@ -124,7 +140,7 @@ ORDER BY table_name, privilege_type;
  brewpos_app  | staff          | SELECT
 (13 rows)
 ```
-**Finding:** The single runtime user `brewpos_app` possessed direct `UPDATE` and `DELETE` privileges on `public.menu_category` and `public.menu_item`. There was no distinct database role for register/cashier operations versus catalog management operations. Any session authenticated as `brewpos_app` could execute arbitrary catalog price changes or category deletions.
+**Detailed Finding:** The single runtime user `brewpos_app` possessed direct `UPDATE` and `DELETE` privileges on `public.menu_category` and `public.menu_item`. There was no distinct database role for register/cashier operations versus catalog management operations. Any session authenticated as `brewpos_app` could execute arbitrary catalog price changes or category deletions.
 
 ### 4. Baseline Comparison (Activities 3–6 vs. Current State)
 - **Documented Baseline ([docs/user-roles.md](file:///c:/Users/oliva/OneDrive/Documents/BrewPOS/docs/user-roles.md)):** Section 2 specifies that Cashiers are restricted to read-only access on active `menu_item` and cannot alter prices or categories. Catalog modification is strictly reserved for the Store Manager (`app_admin_grp`).
@@ -196,7 +212,11 @@ GRANT app_admin_grp TO brewpos_manager;
 
 ---
 
-## Incident 2: G01-INC2 — No Explicit Order Status Management
+## Incident 2: G01-INC2 — Order Status Lifecycle Tracking
+
+> **Owner's Finding:** An inspection of `order_ticket` confirmed that the table lacked an order status attribute, treating all transactions as immediately completed upon insertion. This prevented floor staff from tracking in-flight kitchen preparation or recording cancellations without illegally deleting rows or corrupting sales totals.  
+>  
+> **Owner's Response to Said Flaw:** We resolved this limitation by adding an `order_status` column with a check constraint enforcing valid pending, preparing, completed, and cancelled states. Historical orders were defaulted to completed to preserve existing data, and verification tests confirmed that invalid status values are rejected.
 
 ### 1. Incident Metadata & Classification
 - **Incident ID:** `G01-INC2`
@@ -228,7 +248,7 @@ ORDER BY ordinal_position;
  payment_method  | character varying           |                                   | NO
 (4 rows)
 ```
-**Finding:** The table contains only 4 columns: `order_id`, `staff_id`, `order_timestamp`, and `payment_method`. There is no lifecycle status column. Every record is inherently treated as completed, preventing kitchen staff and cashiers from tracking in-flight orders or recording cancellations.
+**Detailed Finding:** The table contains only 4 columns: `order_id`, `staff_id`, `order_timestamp`, and `payment_method`. There is no lifecycle status column. Every record is inherently treated as completed, preventing kitchen staff and cashiers from tracking in-flight orders or recording cancellations.
 
 ### 4. Baseline Comparison (Activities 3–6 vs. Current State)
 - **Documented Baseline ([database/DATABASE_DOCUMENTATION.md](file:///c:/Users/oliva/OneDrive/Documents/BrewPOS/database/DATABASE_DOCUMENTATION.md)):** `order_ticket` was documented as storing customer transaction headers. The original Activity 3 design omitted order state tracking, assuming an instantaneous retail checkout model.
@@ -285,7 +305,11 @@ CREATE INDEX idx_order_ticket_status_timestamp ON public.order_ticket (order_sta
 
 ---
 
-## Incident 3: G01-INC3 — Database Documentation Does Not Match SQL Implementation
+## Incident 3: G01-INC3 — Database Documentation vs. SQL Role Alignment
+
+> **Owner's Finding:** System catalog queries in `pg_roles` revealed that `05_create_app_role.sql` created only `brewpos_app`, completely omitting the documented group roles and auditor account. This caused connection rejections when compliance auditors attempted to log in using the credentials specified in the system documentation.  
+>  
+> **Owner's Response to Said Flaw:** We overhauled our role creation script to idempotently provision all documented group roles and create the dedicated `brewpos_auditor` login account with read-only transaction defaults. We verified the alignment by confirming all roles exist in the PostgreSQL catalog and proving that auditor write attempts are blocked.
 
 ### 1. Incident Metadata & Classification
 - **Incident ID:** `G01-INC3`
@@ -314,7 +338,7 @@ ORDER BY rolname;
  brewpos_app | f        | t           | f
 (1 row)
 ```
-**Finding:** Only `brewpos_app` existed. The group roles `app_runtime_grp`, `app_readonly_grp`, `app_admin_grp`, and the documented login role `brewpos_auditor` were completely missing from the PostgreSQL catalog.
+**Detailed Finding:** Only `brewpos_app` existed. The group roles `app_runtime_grp`, `app_readonly_grp`, `app_admin_grp`, and the documented login role `brewpos_auditor` were completely missing from the PostgreSQL catalog.
 
 ### 4. Baseline Comparison (Activities 3–6 vs. Current State)
 - **Documented Baseline ([docs/user-roles.md](file:///c:/Users/oliva/OneDrive/Documents/BrewPOS/docs/user-roles.md)):** Section 4.1 explicitly instructs creating 3 group roles (`app_runtime_grp`, `app_readonly_grp`, `app_admin_grp`) and Section 4.3 instructs creating login accounts `brewpos_app` and `brewpos_auditor`.
@@ -390,7 +414,11 @@ ALTER ROLE brewpos_auditor IN DATABASE grp_brewposdb SET statement_timeout = '60
 
 ---
 
-## Incident 4: G01-INC4 — Incorrect Product Lookup in Database Seeder
+## Incident 4: G01-INC4 — Ambiguous Product Lookup in Database Seeder
+
+> **Owner's Finding:** The database seeder joined menu items solely on item name, ignoring the schema's composite uniqueness constraint on category and item name. When identical product names existed across different categories, the query produced Cartesian duplicates that linked incorrect items or triggered primary key collisions.  
+>  
+> **Owner's Response to Said Flaw:** We resolved this seeding defect by refactoring the insertion queries to join deterministically on both category name and item name. We verified the fix by seeding duplicate item names in our test environment, confirming that sample orders populated accurately with zero constraint collisions.
 
 ### 1. Incident Metadata & Classification
 - **Incident ID:** `G01-INC4`
@@ -416,7 +444,7 @@ And cross-referenced this with the table definition in `database/schema.sql`:
 ```sql
 CONSTRAINT uq_menu_item_category_name UNIQUE (category_id, item_name)
 ```
-**Finding:** Uniqueness is constrained on `(category_id, item_name)`, NOT on `item_name` alone. The database schema deliberately permits different categories to contain identical item names (e.g., "Iced Latte" under Coffee vs "Iced Latte" under Non-Coffee). Joining solely on `m.item_name = v.item_name` produces a Cartesian product whenever homonymous items exist. This causes either incorrect product association (attaching the wrong category's item) or fatal primary key collisions on `pk_order_line_item (order_id, item_id)`.
+**Detailed Finding:** Uniqueness is constrained on `(category_id, item_name)`, NOT on `item_name` alone. The database schema deliberately permits different categories to contain identical item names (e.g., "Americano" under Coffee vs "Americano" under Non-Coffee). Joining solely on `m.item_name = v.item_name` produces a Cartesian product whenever homonymous items exist. This causes either incorrect product association (attaching the wrong category's item) or fatal primary key collisions on `pk_order_line_item (order_id, item_id)`.
 
 ### 4. Baseline Comparison (Activities 3–6 vs. Current State)
 - **Baseline Design ([database/schema.sql](file:///c:/Users/oliva/OneDrive/Documents/BrewPOS/database/schema.sql)):** Designed with a composite unique constraint `uq_menu_item_category_name (category_id, item_name)`.
@@ -470,7 +498,11 @@ JOIN public.menu_item m
 
 ---
 
-## Incident 5: G01-INC5 — No Dedicated Payment Transaction Records
+## Incident 5: G01-INC5 — Dedicated Payment Transaction Table Architecture
+
+> **Owner's Finding:** The database stored payment information solely as a single cash or online string on `order_ticket`, lacking a dedicated table for granular financial records. This prevented the system from capturing electronic transaction reference numbers, tender amounts, change calculations, or split-tender payments.  
+>  
+> **Owner's Response to Said Flaw:** We resolved this gap by creating a dedicated `payment_transaction` table with foreign keys, check constraints, and an automated data migration backfilling historical order totals. We verified the fix by successfully recording multi-tender split payments with gateway reference codes and confirming that negative amounts are rejected.
 
 ### 1. Incident Metadata & Classification
 - **Incident ID:** `G01-INC5`
@@ -499,7 +531,7 @@ WHERE t.relname = 'order_ticket' AND conname LIKE '%payment%';
  chk_order_ticket_payment | CHECK ((payment_method)::text = ANY (ARRAY['CASH'::character varying, 'ONLINE'::character varying]::text[]))
 (1 row)
 ```
-**Finding:**
+**Detailed Finding:**
 1. Only two hardcoded payment strings exist (`CASH`, `ONLINE`).
 2. There is no support for GCash, Maya, Debit/Credit Card, or split payments.
 3. No transaction reference IDs, tender amounts, change calculations, payment timestamps, or payment statuses (`COMPLETED`, `REFUNDED`, `FAILED`) can be recorded. Staff cannot inspect payment details.
@@ -653,7 +685,7 @@ The owner group evaluated the 5 incident scenarios designed by Group 10:
 
 # 8. AI Usage Declaration & Validation Methodology
 
-- **Tools Utilized:**Gemini 3.8 Flash.
+- **Tools Utilized:** Gemini 3.8 Flash.
 - **Scope of Generation:** AI was used to draft structural templates for the incident investigation report, format markdown comparison tables, and suggest initial query structures for historical payment migration.
 - **Independent Human Validation Methodology:**
   1. Every SQL query, constraint definition, and role grant proposed by AI was independently reviewed against the official PostgreSQL 18 Documentation.
